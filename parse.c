@@ -6,13 +6,13 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/06 18:02:16 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:34:33 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	*check_num(char *f)
+int	check_num(char *f)
 {
 	int	*r;
 	int	i;
@@ -30,7 +30,7 @@ int	*check_num(char *f)
 		while (!ft_isdigit(f[i]))
 			i++;
 	}
-	return(r);
+	return (r[0] << 16 | r[1] << 8 | r[2]);
 }
 
 bool	num_val(char *f)
@@ -61,11 +61,22 @@ bool	num_val(char *f)
 	return (1);
 }
 
+bool	valid_f(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] == ' ')
+		i++;
+	if(s[i] )
+
+}
+
 void	if_elements(t_elements **el, char *f)
 {
 	while (*f)
 	{
-		if (!ft_strncmp("NO", f, 2))
+		if (!ft_strncmp("NO", f, 2) && valid_f(f + 2))
 			(*el)->n = ft_substr(f, 0, ft_strchr(f, '\n'));
 		else if (!ft_strncmp("SO", f, 2))
 			(*el)->s = ft_substr(f, 0, ft_strchr(f, '\n'));
@@ -79,7 +90,6 @@ void	if_elements(t_elements **el, char *f)
 			(*el)->c = check_num(f);
 		f++;
 	}
-	
 }
 
 t_elements	*map(char *f)
@@ -92,10 +102,14 @@ t_elements	*map(char *f)
 	ft_memset(el, 0, sizeof(el));
 	while (f[i])
 	{
+		while (f[i] != '\n')
+			i++;
+		while (f[i] == ' ')
+			i++;
 		if_elements(&el, f + i);
 		i++;
 	}
-	
+	return (el);
 }
 
 int	check_file(const char *file_name)

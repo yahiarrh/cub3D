@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:26:16 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/06 17:56:08 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:58:56 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_elements
 	char	*s;
 	char	*e;
 	char	*w;
-	int		*f;
-	int		*c;
+	int		f;
+	int		c;
 }t_elements;
 
 
