@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/13 20:39:09 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:29:48 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 void	v_map(char *f)
 {
-	int i;
-	int l;
+	int	i;
 
 	i = 0;
-	l = body_len(f);
 	while (f[i] && f[i] != '\n')
 	{
 		if (f[i++] != '1')
 			ft_putstr_fd("Probleme in wall\n", 2);
 	}
-	while (f[i] && i < l)
+	while (f[i] && i < body_len(f))
 	{
 		if (f[i - 1] == '\n' && f[i] != '1')
 			ft_putstr_fd("Probleme in wall\n", 2);
 		if (f[i] == '\n' && f[i] && f[i + 1] != '1')
 			ft_putstr_fd("Probleme in wall\n", 2);
-		if (f[i] != '1' && f[i] != '0' && f[i] != 'N' && f[i] != 'S' && f[i] != 'W' && f[i] != 'E' && f[i] != '\n')
+		if (f[i] != '1' && f[i] != '0' && f[i] != 'N' && f[i] != 'S'
+			&& f[i] != 'W' && f[i] != 'E' && f[i] != '\n')
 			ft_putstr_fd("Probleme in wall\n", 2);
 		i++;
 	}
@@ -64,8 +63,8 @@ int	check_num(char *f)
 
 bool	num_val(char *f)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	i = 0;
 	flag = 0;
@@ -106,7 +105,7 @@ bool	if_elements(t_elements **el, char *f, t_v *v)
 		(*el)->c = check_num(f);
 	else
 		return (false);
-	return (true);	
+	return (true);
 }
 
 void	valid_el(t_v v)

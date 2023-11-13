@@ -5,18 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 13:26:16 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/13 20:33:06 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/11/13 21:24:41 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
-#define CUB_H
+# define CUB_H
 
-#include <fcntl.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include "libft/libft.h"
+# include <fcntl.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include "libft/libft.h"
 
 typedef struct s_file
 {
@@ -26,7 +26,6 @@ typedef struct s_file
 	int		fd;
 	int		n;
 }t_file;
-
 
 typedef struct s_elements
 {
@@ -59,5 +58,5 @@ bool	num_val(char *f);
 bool	if_elements(t_elements **el, char *f, t_v *v);
 void	valid_el(t_v v);
 void	v_map(char *f);
-int	body_len(char *f);
+int		body_len(char *f);
 #endif
