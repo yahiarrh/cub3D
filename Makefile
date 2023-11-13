@@ -3,7 +3,7 @@ NAME = cub
 SRC	=	parse.c utils_parse.c
 
  
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g
 
 CC		= cc
 

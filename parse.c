@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/12 00:49:21 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:44:18 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,43 +40,37 @@ void	fill_map(t_map **map, char *f)
 	int	i;
 
 	i = 0;
-	while (f[i] != '1')
+	while (f[i] && f[i] != '1')
 		i++;
 	if (f[i] != '1')
-	{
 		ft_putstr_fd("No map\n", 2);
-		exit(1);
-	}
-	(*map)->roof = ft_substr(f + i, 0, ft_strchr(f, '\n'));
-	i += ft_strlen((*map)->roof);
-	(*map)->body = ft_substr(f + i, 0, body_len(f + i));
-	i += ft_strlen((*map)->body);
-	(*map)->floor = ft_substr(f + i, 0, ft_strchr(f, '\n'));
+	v_map(f + i);
+	(*map)->map = ft_substr(f, i, ft_strlen(f));
 }
 
-t_elements	*check_el(char *f)
+t_elements	*check_el(char *f, t_map *map)
 {
 	t_elements	*el;
-	t_v			*v;
+	t_v			v;
 	int			i;
 
 	i = 0;
 	el = malloc(sizeof(t_elements));
-	v = malloc(sizeof(t_v));
 	ft_memset(el, 0, sizeof(el));
-	ft_memset(v, 0, sizeof(v));
+	ft_memset(&v, 0, sizeof(t_v));
 	while (f[i])
 	{
-		while (f[i] == ' ')
+		while (f[i] == '\n')
 			i++;
-		while (f[i] != '\n')
+		while (f[i] == ' ')
 			i++;
 		if (!if_elements(&el, f + i, &v))
 			break;
-		i++;
+		while (f[i] && f[i] != '\n')
+			i++;
 	}
-	if (!valid_el(v))
-		exit(0);
+	valid_el(v);
+	fill_map(&map, f + i);
 	return (el);
 }
 
@@ -87,10 +81,7 @@ void	check_file(const char *file_name, t_map *map)
 	f.fd = open(file_name, O_RDONLY);
 	f.n = 1;
 	if (f.fd < 0)
-	{
 		ft_putstr_fd("File not found\n", 2);
-		exit (1);
-	}
 	f.s = NULL;
 	while (f.n > 0)
 	{
@@ -104,28 +95,18 @@ void	check_file(const char *file_name, t_map *map)
 		free(f.tmp);
 		free(f.buff);
 	}
-	map->e = check_el(f.s);
-	fill_map(&map, f.s);
+	map->e = check_el(f.s, map);
 }
 int	main(int ac, char **av)
 {
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));
+	ft_memset(map, 0, sizeof(map));
 	if (ac == 2)
 	{
 		if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
-			return (ft_putstr_fd("File must be .cub\n", 2), 0);
+			ft_putstr_fd("File must be .cub\n", 2);
 		check_file(av[1], map);
-		printf("elements : %s\n", map->e->n);
-		printf("elements : %s\n", map->e->s);
-		printf("elements : %s\n", map->e->w);
-		printf("elements : %s\n", map->e->e);
-		printf("elements : %d\n", map->e->f);
-		printf("elements : %d\n", map->e->c);
-		printf("floor : %s\n", map->floor);
-		printf("body : %s\n", map->body);
-		printf("roof : %s\n", map->roof);
-
 	}
 }

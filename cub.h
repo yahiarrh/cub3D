@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:26:16 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/12 00:39:49 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:33:06 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ typedef struct s_v
 typedef struct s_map
 {
 	t_elements	*e;
-	char		*roof;
-	char		*floor;
-	char		*body;
+	char		*map;
 }t_map;
 
 int		check_num(char *f);
 bool	num_val(char *f);
-bool	valid_f(char *s);
-bool	if_elements(t_elements **el, char *f, t_v **v);
-bool	valid_el(t_v *v);
+bool	if_elements(t_elements **el, char *f, t_v *v);
+void	valid_el(t_v v);
+void	v_map(char *f);
+int	body_len(char *f);
 #endif
