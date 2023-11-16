@@ -1,6 +1,6 @@
 NAME = cub
 
-SRC	=	parse.c utils_parse.c
+SRC	=	parse.c utils_parse.c utils_parse2.c
 
  
 CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/13 21:32:31 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:46:22 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_elements	*check_el(char *f, t_map *map)
 	{
 		while (f[i] == '\n')
 			i++;
-		while (f[i] == ' ')
+		while (f[i] == ' ' || f[i] == '\t')
 			i++;
 		if (!if_elements(&el, f + i, &v))
 			break ;
