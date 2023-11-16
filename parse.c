@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/16 15:46:22 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:51:35 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,5 @@ int	main(int ac, char **av)
 		if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 			ft_putstr_fd("File must be .cub\n", 2);
 		check_file(av[1], map);
-		// printf("elsement : %s\n", map->e->n);
-		// printf("elsement : %s\n", map->e->s);
-		// printf("elsement : %s\n", map->e->w);
-		// printf("elsement : %s\n", map->e->e);
-		// printf("elsement : %d\n", map->e->f);
-		// printf("elsement : %d\n", map->e->c);
-		// printf("%s\n", map->map);
 	}
 }

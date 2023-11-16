@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/16 14:15:47 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:55:48 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	cha_v(char c)
 {
 	if (c != ' ' && c != '\t' && c != '1' && c != '0'
-			&& c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != '\n')
+		&& c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != '\n')
 		return (false);
 	return (true);
 }
@@ -42,6 +42,6 @@ int	ft_start(char *f)
 	i = 0;
 	while (f[i] && (f[i] == ' ' || f[i] == '\t'))
 		i++;
-	i += 2;	
+	i += 2;
 	return (i);
 }

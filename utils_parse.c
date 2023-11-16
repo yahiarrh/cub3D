@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/16 15:45:53 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:55:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	v_map(char *f)
 		i++;
 	}
 }
+
 bool	num_val(char *f)
 {
 	int	i;
@@ -79,8 +80,8 @@ int	check_num(char *f)
 		if (r[j] > 255)
 			ft_putstr_fd("Numbers must in 0 & 255 range\n", 2);
 		j++;
-		while (f[i] && f[i] != '\n' && (ft_isdigit(f[i])  ||
-				f[i] == ' ' || f[i] == '\t'))
+		while (f[i] && f[i] != '\n' && (ft_isdigit(f[i])
+				|| f[i] == ' ' || f[i] == '\t'))
 			i++;
 	}
 	return (r[0] << 16 | r[1] << 8 | r[2]);
@@ -89,13 +90,17 @@ int	check_num(char *f)
 bool	if_elements(t_elements **el, char *f, t_v *v)
 {
 	if (!ft_strncmp("NO", f, 2) && el_v(f + 2) && !v->n++)
-		(*el)->n = ft_substr(f, ft_start(f + 2), ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->n = ft_substr(f, ft_start(f + 2), 
+				ft_strchr(f, '\n') - ft_start(f + 2));
 	else if (!ft_strncmp("SO", f, 2) && el_v(f + 2) && !v->s++)
-		(*el)->s = ft_substr(f, ft_start(f + 2), ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->s = ft_substr(f, ft_start(f + 2),
+				ft_strchr(f, '\n') - ft_start(f + 2));
 	else if (!ft_strncmp("WE", f, 2) && el_v(f + 2) && !v->w++)
-		(*el)->w = ft_substr(f, ft_start(f + 2), ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->w = ft_substr(f, ft_start(f + 2),
+				ft_strchr(f, '\n') - ft_start(f + 2));
 	else if (!ft_strncmp("EA", f, 2) && el_v(f + 2) && !v->e++)
-		(*el)->e = ft_substr(f, ft_start(f + 2), ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->e = ft_substr(f, ft_start(f + 2),
+				ft_strchr(f, '\n') - ft_start(f + 2));
 	else if (!ft_strncmp("F", f, 1) && num_val(f + 1) && !v->f++)
 		(*el)->f = check_num(f);
 	else if (!ft_strncmp("C", f, 1) && num_val(f + 1) && !v->c++)
