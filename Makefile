@@ -2,8 +2,11 @@ NAME = cub
 
 SRC	=	parse.c utils_parse.c utils_parse2.c
 
- 
-CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g
+GLFW = $(shell brew --perfix glfw)
+
+framG = -framework Cocoa -framework OpenGL -framework IOKit
+
+CFLAGS	= -Wall -Wextra -Werror
 
 CC		= cc
 
@@ -22,7 +25,7 @@ all	: $(NAME)
 
 $(NAME) : $(OBJS)
 	@make -C libft
-	cc $(OBJS) -o $(NAME) $(LIBFT) $(CFLAGS)
+	cc $(OBJS) -o $(NAME) $(LIBFT) $(CFLAGS) libmlx42.a -Iinclude -lglfw -L"$(GLFW)/lib/" $(framG)
 
 clean :
 	@make clean -C libft
