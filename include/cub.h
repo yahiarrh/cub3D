@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/16 15:51:27 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:58:49 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_file
 {
@@ -50,16 +50,20 @@ typedef struct s_v
 typedef struct s_map
 {
 	t_elements	*e;
-	char		*map;
+	char		**map;
 }t_map;
 
 int		check_num(char *f);
 bool	num_val(char *f);
 bool	if_elements(t_elements **el, char *f, t_v *v);
 void	valid_el(t_v v);
-void	v_map(char *f);
+void	v_map(char **f);
 int		body_len(char *f);
-bool	cha_v(char c);
 bool	el_v(char *f);
-int		ft_start(char *f);
+bool	cha_v(char c);
+bool	cha_v2(char c);
+int		count_word(char **f);
+int		ft_start(char *f, int flag);
+void	v_walls(char **f);
+void	v_body(char **f);
 #endif

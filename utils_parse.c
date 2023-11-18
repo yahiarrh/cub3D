@@ -6,37 +6,33 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/16 15:55:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/18 23:03:32 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "include/cub.h"
 
-void	v_map(char *f)
+void	v_map(char **f)
 {
 	int	i;
+	int	l;
 
 	i = 0;
-	while (f[i] && f[i] != '\n')
+	l = count_word(f);
+	l--;
+	while (f[0][i] && f[0][i] != '\n')
 	{
-		if (f[i] != '1' && f[i] != ' ' && f[i] != '\t')
-			ft_putstr_fd("Probleme in map\n", 2);
+		if (f[0][i] != '1' && f[0][i] != ' ' && f[0][i] != '\t')
+			ft_putstr_fd("Probleme in walls\n", 2);
 		i++;
 	}
-	while (f[i] && i < body_len(f))
+	v_walls(f);
+	v_body(f);
+	i = 0;
+	while (f[l][i] && f[l][i] != '\n')
 	{
-		if (f[i - 1] == '\n' && f[i] != '1')
-			ft_putstr_fd("Probleme in map\n", 2);
-		if (f[i] == '\n' && f[i] && f[i + 1] != '1')
-			ft_putstr_fd("Probleme in map\n", 2);
-		if (!cha_v(f[i]))
-			ft_putstr_fd("Probleme in map\n", 2);
-		i++;
-	}
-	while (f[i] && f[i] != '\n')
-	{
-		if (f[i] != '1' && f[i] != ' ' && f[i] != '\t')
-			ft_putstr_fd("Probleme in map\n", 2);
+		if (f[l][i] != '1' && f[l][i] != ' ' && f[l][i] != '\t')
+			ft_putstr_fd("Probleme in walls\n", 2);
 		i++;
 	}
 }
@@ -90,17 +86,17 @@ int	check_num(char *f)
 bool	if_elements(t_elements **el, char *f, t_v *v)
 {
 	if (!ft_strncmp("NO", f, 2) && el_v(f + 2) && !v->n++)
-		(*el)->n = ft_substr(f, ft_start(f + 2), 
-				ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->n = ft_substr(f, ft_start(f + 2, 0), 
+				ft_strchr(f, '\n') - ft_start(f + 2, 0));
 	else if (!ft_strncmp("SO", f, 2) && el_v(f + 2) && !v->s++)
-		(*el)->s = ft_substr(f, ft_start(f + 2),
-				ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->s = ft_substr(f, ft_start(f + 2, 0),
+				ft_strchr(f, '\n') - ft_start(f + 2, 0));
 	else if (!ft_strncmp("WE", f, 2) && el_v(f + 2) && !v->w++)
-		(*el)->w = ft_substr(f, ft_start(f + 2),
-				ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->w = ft_substr(f, ft_start(f + 2, 0),
+				ft_strchr(f, '\n') - ft_start(f + 2, 0));
 	else if (!ft_strncmp("EA", f, 2) && el_v(f + 2) && !v->e++)
-		(*el)->e = ft_substr(f, ft_start(f + 2),
-				ft_strchr(f, '\n') - ft_start(f + 2));
+		(*el)->e = ft_substr(f, ft_start(f + 2, 0),
+				ft_strchr(f, '\n') - ft_start(f + 2, 0));
 	else if (!ft_strncmp("F", f, 1) && num_val(f + 1) && !v->f++)
 		(*el)->f = check_num(f);
 	else if (!ft_strncmp("C", f, 1) && num_val(f + 1) && !v->c++)
