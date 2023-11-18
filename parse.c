@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/16 15:51:35 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:37:13 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	fill_map(t_map **map, char *f)
 		i++;
 	if (f[i] != '1')
 		ft_putstr_fd("No map\n", 2);
-	v_map(f + i);
-	(*map)->map = ft_substr(f, i, ft_strlen(f));
+	(*map)->map = ft_split(f + i, '\n');
+	v_map((*map)->map);
 }
 
 t_elements	*check_el(char *f, t_map *map)
@@ -101,6 +101,7 @@ void	check_file(const char *file_name, t_map *map)
 int	main(int ac, char **av)
 {
 	t_map	*map;
+	int	i = 0;
 
 	map = malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(map));
@@ -109,5 +110,11 @@ int	main(int ac, char **av)
 		if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 			ft_putstr_fd("File must be .cub\n", 2);
 		check_file(av[1], map);
+		while (map->map[i])
+		{
+			printf("%s", map->map[i]);
+			i++;
+		}
+		
 	}
 }

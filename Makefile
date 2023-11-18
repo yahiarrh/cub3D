@@ -1,6 +1,6 @@
 NAME = cub
 
-SRC	=	parse.c utils_parse.c utils_parse2.c
+SRC	=	parse.c utils_parse.c utils_parse2.c v_map.c
 
  
 CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g
@@ -16,7 +16,7 @@ LIBFT = libft/libft.a
 OBJS	= $(SRC:.c=.o)
 
 %.o : %.c $(HEADERM)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 all	: $(NAME)
 

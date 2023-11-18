@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/16 15:55:48 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:45:19 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 bool	cha_v(char c)
 {
-	if (c != ' ' && c != '\t' && c != '1' && c != '0'
-		&& c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != '\n')
+	if (!c)
 		return (false);
-	return (true);
+	if (c == '1' || c == '0' || c == 'N' || c == 'S'
+		|| c == 'W' || c == 'E' || c == '\n')
+		return (true);
+	return (false);
 }
 
 bool	el_v(char *f)
@@ -35,13 +37,58 @@ bool	el_v(char *f)
 	return (true);
 }
 
-int	ft_start(char *f)
+int	ft_start(char *f, int flag)
 {
 	int	i;
 
 	i = 0;
-	while (f[i] && (f[i] == ' ' || f[i] == '\t'))
-		i++;
-	i += 2;
+	if (!flag)
+	{
+		while (f[i] && (f[i] == ' ' || f[i] == '\t'))
+			i++;
+	}
+	else
+	{
+		i = ft_strchr(f, '\n');
+		if (i)
+			i--;
+		while (i && (f[i] == ' ' || f[i] == '\t'))
+			i--;
+	}
 	return (i);
 }
+int	count_word(char **f)
+{
+	int	i;
+
+	i = 0;
+	while (f[i])
+		i++;
+	return (i);
+}
+
+void	v_body(char **f)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (f[i])
+	{
+		j = 0;
+		while (f[i][j] && j < ft_start(f[i], 1))
+		{
+			if (!cha_v(f[i][j]))
+				ft_putstr_fd("Probleme in map\n", 2);
+			if (!j && cha_v2(f[i][j]) && (!cha_v(f[i - 1][j]) || !cha_v(f[i + 1][j])
+				|| !cha_v(f[i][j + 1])))
+				ft_putstr_fd("Probleme in map\n", 2);
+			else if (j && cha_v2(f[i][j]) && (!cha_v(f[i - 1][j]) || !cha_v(f[i + 1][j])
+				|| !cha_v(f[i][j + 1]) || !cha_v(f[i][j - 1])))
+				ft_putstr_fd("Probleme in map\n", 2);
+			j++;
+		}
+		i++;
+	}
+}
+//0||9||22
