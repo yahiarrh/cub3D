@@ -1,8 +1,8 @@
-NAME = cub
+NAME = cub3d
 
-SRC	=	parse.c utils_parse.c utils_parse2.c
+SRC	=	test.c #parse.c utils_parse.c utils_parse2.c
 
-GLFW = $(shell brew --perfix glfw)
+GLFW = $(shell brew --prefix glfw)
 
 framG = -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -12,7 +12,7 @@ CC		= cc
 
 RM 		= rm -rf
 
-HEADERM = cub.h
+HEADERM = include/cub.h
 
 LIBFT = libft/libft.a
 
