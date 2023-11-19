@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/18 23:17:01 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/19 14:57:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub.h"
+#include "../include/cub.h"
 
 int	body_len(char *f)
 {

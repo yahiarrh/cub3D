@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/18 23:00:33 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/19 14:57:34 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub.h"
+#include "../include/cub.h"
 
 bool	cha_v(char c)
 {

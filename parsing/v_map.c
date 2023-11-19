@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/18 22:55:18 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/19 14:57:38 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub.h"
+#include "../include/cub.h"
 
 void	v_walls(char **f)
 {
