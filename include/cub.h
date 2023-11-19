@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/18 22:58:49 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:45:10 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include "../libft/libft.h"
+# include "MLX42.h"
+#include <math.h>
 
 typedef struct s_file
 {

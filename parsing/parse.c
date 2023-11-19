@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/19 14:57:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:29:33 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,25 +98,4 @@ void	check_file(const char *file_name, t_map *map)
 		free(f.buff);
 	}
 	map->e = check_el(f.s, map);
-}
-
-int	main(int ac, char **av)
-{
-	t_map	*map;
-	int	i = 0;
-
-	map = malloc(sizeof(t_map));
-	ft_memset(map, 0, sizeof(map));
-	if (ac == 2)
-	{
-		if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
-			ft_putstr_fd("File must be .cub\n", 2);
-		check_file(av[1], map);
-		while (map->map[i])
-		{
-			printf("%s", map->map[i]);
-			i++;
-		}
-		
-	}
 }
