@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/19 14:57:38 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:45:10 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,22 @@ bool	cha_v2(char c)
 		|| c == 'W' || c == 'E' || c == '\n')
 		return (true);
 	return (false);
+}
+void	trim_spc(t_map **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while ((*map)->map[i])
+	{
+		j = 0;
+		while ((*map)->map[i][j])
+		{
+			if ((*map)->map[i][j] == ' ' ||  (*map)->map[i][j] == '\t')
+				(*map)->map[i][j] = '\0';
+			j++;
+		}
+		i++;
+	}
 }

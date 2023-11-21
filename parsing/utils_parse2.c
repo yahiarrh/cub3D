@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/19 14:57:34 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/21 23:36:30 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,16 @@ void	v_body(char **f)
 	while (f[i])
 	{
 		j = 0;
-		while (f[i][j] && j < ft_start(f[i], 1))
+		while (f[i][j])
 		{
+			printf("%c|next %c|up: %c| down %c\n", f[i][j],f[i - 1][j],f[i + 1][j],f[i][j+1]);
 			if (!cha_v(f[i][j]))
 				ft_putstr_fd("Probleme in map\n", 2);
 			if (!j && cha_v2(f[i][j]) && (!cha_v(f[i - 1][j]) || !cha_v(f[i + 1][j])
 				|| !cha_v(f[i][j + 1])))
 				ft_putstr_fd("Probleme in map\n", 2);
 			else if (j && cha_v2(f[i][j]) && (!cha_v(f[i - 1][j]) || !cha_v(f[i + 1][j])
-				|| !cha_v(f[i][j + 1]) || !cha_v(f[i][j - 1])))
+				|| !cha_v(f[i][j + 1])))
 				ft_putstr_fd("Probleme in map\n", 2);
 			j++;
 		}
