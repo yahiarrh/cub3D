@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/19 14:57:30 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:01:43 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	v_map(char **f)
 	v_walls(f);
 	v_body(f);
 	i = 0;
-	while (f[l][i] && f[l][i] != '\n')
+	while (f[l][i])
 	{
 		if (f[l][i] != '1' && f[l][i] != ' ' && f[l][i] != '\t')
 			ft_putstr_fd("Probleme in walls\n", 2);
