@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 17:09:12 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:47:50 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	main(int ac, char **av)
 		img = mlx_new_image(mlx, 1024, 512);
 		mlx_image_to_window(mlx, img, 0, 0);
 		draw(img, map->map);
-		printf("x: %d|y: %d|dir: %f\n", map->player->x,map->player->y, map->player->dirction);
-		printf("x: %d|y: %d|dir: %f\n", map->player->angle,map->player->walk, map->player->speed);
 		mlx_loop(mlx);
 		mlx_terminate(mlx);
 	}
