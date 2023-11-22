@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 13:23:23 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:11:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	fill_map(t_map **map, char *f)
 		ft_putstr_fd("Element externe\n", 2);
 	(*map)->map = ft_split(f + i, '\n');
 	trim_spc(map);
-	v_map((*map)->map);
+	v_map(map);
 }
 
 t_elements	*check_el(char *f, t_map *map)
@@ -98,5 +98,6 @@ void	check_file(const char *file_name, t_map *map)
 		free(f.tmp);
 		free(f.buff);
 	}
+	close(f.fd);
 	map->e = check_el(f.s, map);
 }

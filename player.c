@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:22:14 by msaidi            #+#    #+#             */
-/*   Updated: 2023/11/22 15:26:01 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/11/22 15:52:16 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub.h"
 
-void	p_creat(mlx_image_t *img, char **map)
-{
+// void	p_creat(mlx_image_t *img, char **map)
+// {
 	
 	
-}
+// }
