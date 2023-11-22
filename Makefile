@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRC	=	parsing/parse.c parsing/utils_parse.c parsing/utils_parse2.c parsing/v_map.c
+SRC	=	parsing/parse.c parsing/utils_parse.c parsing/utils_parse2.c parsing/v_map.c main.c map.c player.c
 
 GLFW = $(shell brew --prefix glfw)
 
