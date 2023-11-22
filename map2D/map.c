@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:23:27 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/21 22:48:45 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:44:20 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    draw(mlx_image_t *img, char **map)
 		{
 			if (map[x][y] == '1')
 				draw_cube(img, x * 32, y * 32, 254);
-			else if (map[x][y] == '0')
+			else if (cha_v2(map[x][y]))
 				draw_cube(img, x * 32, y * 32, (254 << 24 | 254 << 16 | 254 << 8 | 254));
 			y++;
 		}
