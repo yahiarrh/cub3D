@@ -3,24 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 18:47:50 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:43:14 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub.h"
 #include "include/MLX42.h"
-
-void	p_init(t_map **map)
-{
-	(*map)->player  = malloc(sizeof(t_player));
-	ft_memset((*map)->player, 0, sizeof(t_player));
-	(*map)->player->r = 5;
-	(*map)->player->speed = 2.5;
-	(*map)->player->rotspeed = 1;
-}
 
 int	main(int ac, char **av)
 {
@@ -42,6 +33,7 @@ int	main(int ac, char **av)
 		img = mlx_new_image(mlx, 1024, 512);
 		mlx_image_to_window(mlx, img, 0, 0);
 		draw(img, map->map);
+		draw_player(img, map);
 		mlx_loop(mlx);
 		mlx_terminate(mlx);
 	}

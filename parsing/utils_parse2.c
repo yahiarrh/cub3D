@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 18:46:46 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:49:03 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	v_body(t_map **map)
 			v_body_help((*map)->map, i, j);
 			if (cha_v2((*map)->map[i][j]) && (*map)->map[i][j] != '0')
 			{
-				p_info(map, i, j, (*map)->map[i][j]);
+				p_info(map, j, i, (*map)->map[i][j]);
 				f++;
 			}
 			j++;

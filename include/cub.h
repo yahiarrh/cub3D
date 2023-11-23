@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 16:56:35 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:41:35 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int			body_len(char *f);
 bool		el_v(char *f);
 bool		cha_v(char c);
 bool		cha_v2(char c);
+void		p_init(t_map **map);
 int			count_word(char **f);
 int			ft_start(char *f, int flag);
 void		v_walls(char **f);
@@ -88,5 +89,6 @@ void		fill_map(t_map **map, char *f);
 int			body_len(char *f);
 void		trim_spc(t_map **map);
 void		p_info(t_map **map, int x, int y, char c);
+void	draw_player(mlx_image_t *img, t_map *coor);
 void		v_body_help(char **map, int i, int j);
 #endif
