@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/24 00:31:52 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:48:11 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # include "../libft/libft.h"
 # include "MLX42.h"
 # include <math.h>
-# define RED (254 << 24 | 0 << 16 | 0 << 8 | 254)
-# define WHITE (254 << 24 | 254 << 16 | 254 << 8 | 254)
-# define BLACK (0 << 24 | 0 << 16 | 0 << 8 | 254)
-# define BLUE (0 << 24 | 0 << 16 | 254 << 8 | 254)
-# define GREEN (0 << 24 | 254 << 16 | 0 << 8 | 254)
+# define RED 0xFF0000FF
+# define WHITE 0xFFFFFFFF
+# define BLACK 0xFF
+# define BLUE 0x00000FFFF
+# define GREEN 0x00FF00FF
+# define TILE 64
 
 typedef struct s_file
 {
@@ -56,19 +57,19 @@ typedef struct s_v
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int r; // radius
-	double dirction; // -1 left, 1 right;
-	int walk; // -1 backward, 1 forward;
-	int angle; //rotation angle;
-	double speed;	//walking speed
-	int rotspeed; //rotation speed
+	double	dirction; // -1 left, 1 right;
+	double	speed;	//walking speed
+	int		x;
+	int		y;
+	int		r; // radius
+	int		walk; // -1 backward, 1 forward;
+	int		angle; //rotation angle;
+	int		rotspeed; //rotation speed
 }t_player;
 
 typedef struct s_map
 {
-	mlx_t   *mlx;
+	mlx_t		*mlx;
 	mlx_image_t   *img;
 	t_elements	*e;
 	t_player	*player;

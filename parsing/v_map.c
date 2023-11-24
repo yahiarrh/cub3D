@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:25:35 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:10:40 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	trim_spc(t_map **map)
 
 void	p_info(t_map **map, int x, int y, char c)
 {
-	(*map)->player->x = x * 64;
-	(*map)->player->y = y * 64;
+	(*map)->player->x = x * TILE;
+	(*map)->player->y = y * TILE;
 
 	if (c == 'N')
 		(*map)->player->dirction = - M_PI/2;

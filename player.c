@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:22:14 by msaidi            #+#    #+#             */
-/*   Updated: 2023/11/24 01:11:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:14:21 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_player(mlx_image_t *img, t_map *coor)
 		while (y <= coor->player->r)
 		{
 			if (x * x + y * y <= r2 * r2)
-				mlx_put_pixel(img, coor->player->x + x + 32, coor->player->y + y +32, RED);
+				mlx_put_pixel(img, coor->player->x + x + (TILE / 2), coor->player->y + y + (TILE / 2), RED);
 			y++;
 		}
 		x++;

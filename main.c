@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/24 02:36:57 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/25 00:17:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,19 @@ void	key_handle(void	*param)
 	int x;
 	int y;
 
-	x = (map->player->x + 1) / 64;
-	y = (map->player->y + 1) / 64;
+	x = (map->player->x + 10) / TILE;
+	y = (map->player->y + 10) / TILE;
+	mlx_delete_image(map->mlx, map->img);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(map->mlx);
-	if (map->map[y][x] != '1')
-	{
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_UP))
-			map->player->y -= map->player->speed;
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
-			map->player->y += map->player->speed;
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-			map->player->x -= map->player->speed;
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-			map->player->x += map->player->speed;
-	}
+	if (mlx_is_key_down(map->mlx, MLX_KEY_UP) && map->map[y][x] != '1')
+		map->player->y -= map->player->speed;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN) && map->map[y + 1][x] != '1')
+		map->player->y += map->player->speed;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT) && map->map[y][x] != '1')
+		map->player->x -= map->player->speed;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT) && map->map[y][x + 1] != '1')
+		map->player->x += map->player->speed;
 	map->img = mlx_new_image(map->mlx, 1920, 1080);
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
 	draw(map->img, map->map);
@@ -47,7 +41,7 @@ void	key_handle(void	*param)
 int	main(int ac, char **av)
 {
 	t_map	*map;
-	int	i;
+	int		i;
 
 	i = 0;
 	map = malloc(sizeof(t_map));
