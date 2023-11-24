@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/23 20:41:35 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/11/24 00:31:52 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # include "MLX42.h"
-#include <math.h>
+# include <math.h>
+# define RED (254 << 24 | 0 << 16 | 0 << 8 | 254)
+# define WHITE (254 << 24 | 254 << 16 | 254 << 8 | 254)
+# define BLACK (0 << 24 | 0 << 16 | 0 << 8 | 254)
+# define BLUE (0 << 24 | 0 << 16 | 254 << 8 | 254)
+# define GREEN (0 << 24 | 254 << 16 | 0 << 8 | 254)
 
 typedef struct s_file
 {
@@ -63,6 +68,8 @@ typedef struct s_player
 
 typedef struct s_map
 {
+	mlx_t   *mlx;
+	mlx_image_t   *img;
 	t_elements	*e;
 	t_player	*player;
 	char		**map;
@@ -89,6 +96,6 @@ void		fill_map(t_map **map, char *f);
 int			body_len(char *f);
 void		trim_spc(t_map **map);
 void		p_info(t_map **map, int x, int y, char c);
-void	draw_player(mlx_image_t *img, t_map *coor);
+void		draw_player(mlx_image_t *img, t_map *coor);
 void		v_body_help(char **map, int i, int j);
 #endif

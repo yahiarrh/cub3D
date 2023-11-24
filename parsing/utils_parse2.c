@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/23 20:49:03 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/11/23 21:20:13 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,4 @@ void	v_body(t_map **map)
 	}
 	if (f != 1)
 		ft_putstr_fd("Probleme in player\n", 2);
-
 }
