@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/24 01:34:31 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/24 02:36:57 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,15 @@ void	key_handle(void	*param)
 		mlx_delete_image(map->mlx, map->img);
 		if (mlx_is_key_down(map->mlx, MLX_KEY_UP))
 			map->player->y -= map->player->speed;
-		printf("up: %c\n", map->map[y - 1][x]);
-	}
-	if (map->map[y][x] != '1')
-	{
 		mlx_delete_image(map->mlx, map->img);
 		if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
 			map->player->y += map->player->speed;
-		printf("down: %c\n", map->map[y + 1][x]);
-	}
-	if (map->map[y][x] != '1')
-	{
 		mlx_delete_image(map->mlx, map->img);
 		if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 			map->player->x -= map->player->speed;
-		printf("left: %c\n", map->map[y][x + 1]);
-	}
-	if (map->map[y][x] != '1')
-	{
 		mlx_delete_image(map->mlx, map->img);
 		if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 			map->player->x += map->player->speed;
-		printf("right: %c\n", map->map[y][x - 1]);
 	}
 	map->img = mlx_new_image(map->mlx, 1920, 1080);
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
