@@ -6,32 +6,32 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 14:01:43 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:12:24 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
-void	v_map(char **f)
+void	v_map(t_map **map)
 {
 	int	i;
 	int	l;
 
 	i = 0;
-	l = count_word(f);
+	l = count_word((*map)->map);
 	l--;
-	while (f[0][i] && f[0][i] != '\n')
+	while ((*map)->map[0][i] && (*map)->map[0][i] != '\n')
 	{
-		if (f[0][i] != '1' && f[0][i] != ' ' && f[0][i] != '\t')
+		if ((*map)->map[0][i] != '1' && (*map)->map[0][i] != ' ' && (*map)->map[0][i] != '\t')
 			ft_putstr_fd("Probleme in walls\n", 2);
 		i++;
 	}
-	v_walls(f);
-	v_body(f);
+	v_walls((*map)->map);
+	v_body(map);
 	i = 0;
-	while (f[l][i])
+	while ((*map)->map[l][i])
 	{
-		if (f[l][i] != '1' && f[l][i] != ' ' && f[l][i] != '\t')
+		if ((*map)->map[l][i] != '1' && (*map)->map[l][i] != ' ' && (*map)->map[l][i] != '\t')
 			ft_putstr_fd("Probleme in walls\n", 2);
 		i++;
 	}

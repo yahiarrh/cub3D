@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 14:09:57 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:20:13 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 bool	cha_v(char c)
 {
-	if (!c)
-		return (false);
 	if (c == '1' || c == '0' || c == 'N' || c == 'S'
 		|| c == 'W' || c == 'E' || c == '\n')
 		return (true);
@@ -67,27 +65,29 @@ int	count_word(char **f)
 	return (i);
 }
 
-void	v_body(char **f)
+void	v_body(t_map **map)
 {
 	int	i;
 	int	j;
+	int	f;
 
 	i = 1;
-	while (f[i])
+	f = 0;
+	while ((*map)->map[i])
 	{
 		j = 0;
-		while (f[i][j] && cha_v(f[i][j]))
+		while ((*map)->map[i][j] && cha_v((*map)->map[i][j]))
 		{
-			if (!cha_v(f[i][j]))
-				ft_putstr_fd("Probleme in map\n", 2);
-			if (!j && cha_v2(f[i][j]) && (!cha_v(f[i - 1][j]) || !cha_v(f[i + 1][j])
-				|| !cha_v(f[i][j + 1])))
-				ft_putstr_fd("Probleme in map\n", 2);
-			else if (j && cha_v2(f[i][j]) && (!cha_v(f[i - 1][j]) || !cha_v(f[i + 1][j])
-				|| !cha_v(f[i][j + 1])))
-				ft_putstr_fd("Probleme in map\n", 2);
+			v_body_help((*map)->map, i, j);
+			if (cha_v2((*map)->map[i][j]) && (*map)->map[i][j] != '0')
+			{
+				p_info(map, j, i, (*map)->map[i][j]);
+				f++;
+			}
 			j++;
 		}
 		i++;
 	}
+	if (f != 1)
+		ft_putstr_fd("Probleme in player\n", 2);
 }
