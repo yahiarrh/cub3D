@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:37:24 by msaidi            #+#    #+#             */
-/*   Updated: 2023/12/04 20:53:53 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/12/04 21:15:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_point	*verti_inter(t_map *info)
 	step->y = tan(info->ray_ang) * step->x;
 	while (g(a->x) > 0 && g(a->y) > 0
 		&& g(a->y) < info->col
-		&& g(a->x) < ft_strlen(info->map[g(a->y)]) && info->map[g(a->y) + offset][g(a->x)]
+		&& g(a->x) < ft_strlen(info->map[g(a->y) + offset]) && info->map[g(a->y) + offset][g(a->x)]
 		&& info->map[g(a->y)][g(a->x) + offset] != '1')
 	{
 		a->x += step->x;
