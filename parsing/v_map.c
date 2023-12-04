@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:25:35 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:54:00 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,18 @@ void	trim_spc(t_map **map)
 
 void	p_info(t_map **map, int x, int y, char c)
 {
-	(*map)->player->x = x * 64;
-	(*map)->player->y = y * 64;
+	(*map)->player->p = malloc(sizeof(t_point));
+	(*map)->player->p->x = x * 64 + 32;
+	(*map)->player->p->y = y * 64 + 32;
 
 	if (c == 'N')
-		(*map)->player->dirction = - M_PI/2;
+		(*map)->player->angle = 3*M_PI/2;
 	else if (c == 'S')
-		(*map)->player->dirction = M_PI/2;
+		(*map)->player->angle = M_PI/2;
 	else if (c == 'W')
-		(*map)->player->dirction = M_PI;
+		(*map)->player->angle = M_PI;
 	else if (c == 'E')
-		(*map)->player->dirction = 0;
+		(*map)->player->angle = 0;
 }
 
 void	v_body_help(char **map, int i, int j)

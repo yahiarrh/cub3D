@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:23:27 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/24 00:32:10 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:18:58 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void    draw(mlx_image_t *img, char **map)
 	int y;
 
 	x = 0;
+	
 	while (map[x])
 	{
 		y = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:22:14 by msaidi            #+#    #+#             */
-/*   Updated: 2023/11/24 01:11:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:57:46 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	p_init(t_map **map)
 {
 	(*map)->player  = malloc(sizeof(t_player));
 	ft_memset((*map)->player, 0, sizeof(t_player));
-	(*map)->player->r = 10;
-	(*map)->player->speed = 3.0;
-	(*map)->player->rotspeed = 1;
+	(*map)->player->r = 8;
+	(*map)->player->speed = 1.2;
+	(*map)->player->rotspeed = 0.1;
 }
 
 void	draw_player(mlx_image_t *img, t_map *coor)
@@ -34,10 +34,10 @@ void	draw_player(mlx_image_t *img, t_map *coor)
 		while (y <= coor->player->r)
 		{
 			if (x * x + y * y <= r2 * r2)
-				mlx_put_pixel(img, coor->player->x + x + 32, coor->player->y + y +32, RED);
+				mlx_put_pixel(img, coor->player->p->x + x, coor->player->p->y + y, RED);
 			y++;
 		}
 		x++;
 	}
-	
+	cast_rays(coor);
 }

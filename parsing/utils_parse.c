@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 16:12:24 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/03 19:47:49 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	v_map(t_map **map)
 
 	i = 0;
 	l = count_word((*map)->map);
+	(*map)->col = l;
 	l--;
 	while ((*map)->map[0][i] && (*map)->map[0][i] != '\n')
 	{

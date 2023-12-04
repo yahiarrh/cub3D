@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/24 00:31:52 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:58:40 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,17 @@
 # include "../libft/libft.h"
 # include "MLX42.h"
 # include <math.h>
-# define RED (254 << 24 | 0 << 16 | 0 << 8 | 254)
-# define WHITE (254 << 24 | 254 << 16 | 254 << 8 | 254)
-# define BLACK (0 << 24 | 0 << 16 | 0 << 8 | 254)
-# define BLUE (0 << 24 | 0 << 16 | 254 << 8 | 254)
-# define GREEN (0 << 24 | 254 << 16 | 0 << 8 | 254)
+
+# define RED 0xFF0000FF
+# define WHITE 0xFFFFFFFF
+# define BLACK 0xFF
+# define BLUE 0x00000FFFF
+# define GREEN 0x00FF00FF
+# define GRAY 0xC3C3C3FF
+# define KHRA 0x43551DFF
+# define TILE 64
+# define HEIGHT 1080
+# define WIDTH 1920
 
 typedef struct s_file
 {
@@ -54,16 +60,19 @@ typedef struct s_v
 	int	c;
 }t_v;
 
+typedef	struct s_point
+{
+	double	x;
+	double	y;
+}t_point;
+
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int r; // radius
-	double dirction; // -1 left, 1 right;
-	int walk; // -1 backward, 1 forward;
-	int angle; //rotation angle;
-	double speed;	//walking speed
-	int rotspeed; //rotation speed
+	t_point *p;
+	int r;
+	double angle; 
+	double speed;
+	double rotspeed;
 }t_player;
 
 typedef struct s_map
@@ -73,6 +82,9 @@ typedef struct s_map
 	t_elements	*e;
 	t_player	*player;
 	char		**map;
+	int			col;
+	double		ray_ang;
+	double	dist_towall;
 }t_map;
 
 void		check_file(const char *file_name, t_map *map);
@@ -93,9 +105,13 @@ int			ft_start(char *f, int flag);
 void		v_walls(char **f);
 void		v_body(t_map **f);
 void		fill_map(t_map **map, char *f);
-int			body_len(char *f);
 void		trim_spc(t_map **map);
 void		p_info(t_map **map, int x, int y, char c);
 void		draw_player(mlx_image_t *img, t_map *coor);
 void		v_body_help(char **map, int i, int j);
+void		cast_rays(t_map *info);
+void		dda_line(t_point *a, t_point *b, t_map	*map);
+double		rad_switch(double deg);
+int			g(double a);
+
 #endif

@@ -3,45 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/24 02:36:57 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/04 21:07:02 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub.h"
 #include "include/MLX42.h"
 
+double	rad_switch(double deg)
+{
+	return (deg * M_PI / 180);
+}
+bool	no_wall(t_map *info, t_point *a)
+{
+	int	i;
+
+	i = -1;
+	while (i++ < 3)
+	{
+		if (info->map[g(a->y + i)][g(a->x + i)] == '1')
+			return (0);
+		if (info->map[g(a->y)][g(a->x + i)] == '1')
+			return (0);
+		if (info->map[g(a->y - i)][g(a->x)] == '1')
+			return (0);
+	}
+	return (1);
+}
+void	floor_ceiling(t_map *info)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				mlx_put_pixel(info->img, x, y, BLUE);
+			else
+				mlx_put_pixel(info->img, x, y, GRAY);
+			x++;
+		}
+		y++;
+	}
+}
+void	render_3d(t_map *info)
+{
+	floor_ceiling(info);
+	cast_rays(info);
+}
+
 void	key_handle(void	*param)
 {
-	t_map	*map = param;
-	int x;
-	int y;
-
-	x = (map->player->x + 1) / 64;
-	y = (map->player->y + 1) / 64;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(map->mlx);
-	if (map->map[y][x] != '1')
+	t_map	*info = param;
+	double	e;
+	double	f;
+	if (mlx_is_key_down(info->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(info->mlx);
+	mlx_delete_image(info->mlx, info->img);
+	if (mlx_is_key_down(info->mlx, MLX_KEY_F))
+		info->player->speed += 1;
+	if (mlx_is_key_down(info->mlx, MLX_KEY_UP))
 	{
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_UP))
-			map->player->y -= map->player->speed;
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
-			map->player->y += map->player->speed;
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-			map->player->x -= map->player->speed;
-		mlx_delete_image(map->mlx, map->img);
-		if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-			map->player->x += map->player->speed;
+		e = cos(info->player->angle) * info->player->speed;
+		f = sin(info->player->angle) * info->player->speed;
+		if (no_wall(info, &(t_point){e + info->player->p->x, f + info->player->p->y}))
+		{
+			info->player->p->x += cos(info->player->angle) * info->player->speed;
+			info->player->p->y += sin(info->player->angle) * info->player->speed;
+		}
 	}
-	map->img = mlx_new_image(map->mlx, 1920, 1080);
-	mlx_image_to_window(map->mlx, map->img, 0, 0);
-	draw(map->img, map->map);
-	draw_player(map->img, map);
+	if (mlx_is_key_down(info->mlx, MLX_KEY_DOWN))
+	{
+		e = cos(info->player->angle) * info->player->speed;
+		f = sin(info->player->angle) * info->player->speed;
+		if (no_wall(info, &(t_point){info->player->p->x - e, info->player->p->y - f}))
+		{
+			info->player->p->x -= cos(info->player->angle) * info->player->speed;
+			info->player->p->y -= sin(info->player->angle) * info->player->speed;
+		}
+	}
+	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
+		info->player->angle -= rad_switch(4.5);
+	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
+		info->player->angle += rad_switch(4.5);
+	info->img = mlx_new_image(info->mlx, 1920, 1080);
+	mlx_image_to_window(info->mlx, info->img, 0, 0);
+	render_3d(info);
+	// draw(info->img, info->info);
+	// draw_player(info->img, info);
 }
 
 int	main(int ac, char **av)
