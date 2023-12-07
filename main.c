@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/07 21:08:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/07 21:57:36 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,26 @@ void	key_handle(void	*param)
 		{
 			info->player->p->x -= cos(info->player->angle) * info->player->speed;
 			info->player->p->y -= sin(info->player->angle) * info->player->speed;
+		}
+	}
+	if (mlx_is_key_down(info->mlx, MLX_KEY_D))
+	{
+		e = cos(info->player->angle + 90) * info->player->speed;
+		f = sin(info->player->angle + 90) * info->player->speed;
+		if (no_wall(info, &(t_point){info->player->p->x + e, info->player->p->y + f}))
+		{
+			info->player->p->x += cos(info->player->angle + 90) * info->player->speed;
+			info->player->p->y += sin(info->player->angle + 90) * info->player->speed;
+		}
+	}
+	if (mlx_is_key_down(info->mlx, MLX_KEY_A))
+	{
+		e = cos(info->player->angle + 90) * info->player->speed;
+		f = sin(info->player->angle + 90) * info->player->speed;
+		if (no_wall(info, &(t_point){info->player->p->x - e, info->player->p->y - f}))
+		{
+			info->player->p->x -= cos(info->player->angle + 90) * info->player->speed;
+			info->player->p->y -= sin(info->player->angle + 90) * info->player->speed;
 		}
 	}
 	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
