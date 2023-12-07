@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/07 21:07:20 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:37:02 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ typedef struct s_map
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	mlx_image_t	*txt;
 	mlx_texture_t *t;
 	t_elements	*e;
 	t_player	*player;

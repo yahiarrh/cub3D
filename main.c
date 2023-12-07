@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/07 22:00:07 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:31:51 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	render_3d(t_map *info)
 {
 	floor_ceiling(info);
 	cast_rays(info);
+	draw(info->img, info->map);
+	draw_player(info->img, info);
 }
 
 void	key_handle(void	*param)
@@ -96,8 +98,6 @@ void	key_handle(void	*param)
 	info->img = mlx_new_image(info->mlx, 1920, 1080);
 	mlx_image_to_window(info->mlx, info->img, 0, 0);
 	render_3d(info);
-	// draw(info->img, info->info);
-	// draw_player(info->img, info);
 }
 
 int	main(int ac, char **av)
@@ -109,7 +109,6 @@ int	main(int ac, char **av)
 	map = malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(map));
 	p_init(&map);
-	map->t = mlx_load_png("/Users/yrrhaibi/Desktop/cub3D/Wolf3D.png"); 
 	if (ac == 2)
 	{
 		if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
