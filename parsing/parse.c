@@ -6,11 +6,21 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/11/22 16:11:44 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/07 21:06:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
+
+void	fill_color(t_color *c, int f, int color)
+{
+	if (!f)
+		c->r = color;
+	else if (f == 1)
+		c->b = color;
+	else
+		c->g = color;
+}
 
 int	body_len(char *f)
 {
@@ -81,6 +91,7 @@ void	check_file(const char *file_name, t_map *map)
 {
 	t_file	f;
 
+	ft_memset(&f,0, sizeof(t_file));
 	f.fd = open(file_name, O_RDONLY);
 	f.n = 1;
 	if (f.fd < 0)
@@ -90,7 +101,7 @@ void	check_file(const char *file_name, t_map *map)
 	{
 		f.buff = malloc(10);
 		ft_memset(f.buff, 0, 10);
-		f.n = read(f.fd, f.buff, 10);
+		f.n = read(f.fd, f.buff, 9);
 		if (f.n < 0)
 			exit (1);
 		f.tmp = f.s;

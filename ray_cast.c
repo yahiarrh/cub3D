@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:37:24 by msaidi            #+#    #+#             */
-/*   Updated: 2023/12/04 21:15:54 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:51:16 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,26 @@ int	g(double a)
 void	dda_line(t_point *a, t_point *b, t_map	*info)
 {
 	double	i;
-	t_point	*delta;
-	t_point	*p;
+	t_point	delta;
+	t_point	p;
 	double	step;
-	
+
 	i = 1;
-	delta = malloc(sizeof(t_point));
-	p = malloc(sizeof(t_point));
-	p->x = a->x;
-	p->y = a->y;
-	delta->x = b->x - a->x;
-	delta->y = b->y - a->y;
-	if (fabs(delta->x) > fabs(delta->y))
-		step = fabs(delta->x);
+	p.x = a->x;
+	p.y = a->y;
+	delta.x = b->x - a->x;
+	delta.y = b->y - a->y;
+	if (fabs(delta.x) > fabs(delta.y))
+		step = fabs(delta.x);
 	else
-		step = 	fabs(delta->y);
+		step = 	fabs(delta.y);
 	if (step == 0)
 		mlx_put_pixel(info->img, a->x, a->y, KHRA);
 	while (i <= step)
 	{
-		mlx_put_pixel(info->img, round(p->x), round(p->y), KHRA);
-		p->x += delta->x / step;
-		p->y += delta->y / step;
+		mlx_put_pixel(info->img, round(p.x), round(p.y), KHRA);
+		p.x += delta.x / step;
+		p.y += delta.y / step;
 		i++;
 	}
 }
@@ -49,57 +47,55 @@ void	dda_line(t_point *a, t_point *b, t_map	*info)
 t_point	*hori_inter(t_map *info)
 {
 	t_point	*a;
-	t_point	*step;
+	t_point	step;
 	int		offset;
 
 	a = malloc(sizeof(t_point));
-	step = malloc(sizeof(t_point));
 	a->y = floor(info->player->p->y / 64) * 64;
-	step->y = -64;
+	step.y = -64;
 	offset = -1;
 	if (sin(info->ray_ang) > 0)
 	{
 		a->y += 64;
-		step->y *= -1;
+		step.y *= -1;
 		offset = 0;
 	}
 	a->x = (a->y - info->player->p->y) / tan(info->ray_ang) + info->player->p->x;
-	step->x = step->y / tan(info->ray_ang);
+	step.x = step.y / tan(info->ray_ang);
 	while (g(a->x) > 0 && g(a->y) > 0 && g(a->y) < info->col
 	&& g(a->x) < ft_strlen(info->map[g(a->y) + offset])
-	&& info->map[g(a->y)][g(a->x)]
+	&& info->map[g(a->y) + offset][g(a->x)]
 	&& info->map[g(a->y) + offset][g(a->x)] != '1')
 	{
-		a->x += step->x;
-		a->y += step->y;
+		a->x += step.x;
+		a->y += step.y;
 	}
 	return (a);
 }
 t_point	*verti_inter(t_map *info)
 {
 	t_point	*a;
-	t_point	*step;
+	t_point	step;
 	int		offset;
 	
 	a = malloc(sizeof(t_point));
-	step = malloc(sizeof(t_point));
 	a->x = floor(info->player->p->x / 64) * 64;
-	step->x = -64;
+	step.x = -64;
 	offset = -1;
 	if (cos(info->ray_ang) > 0)
 	{
 		offset = 0;
-		(a->x += 64) && (step->x *= (-1));
+		(a->x += 64) && (step.x *= (-1));
 	}
 	a->y = tan(info->ray_ang) * (a->x - info->player->p->x) + info->player->p->y;
-	step->y = tan(info->ray_ang) * step->x;
+	step.y = tan(info->ray_ang) * step.x;
 	while (g(a->x) > 0 && g(a->y) > 0
 		&& g(a->y) < info->col
 		&& g(a->x) < ft_strlen(info->map[g(a->y) + offset]) && info->map[g(a->y) + offset][g(a->x)]
 		&& info->map[g(a->y)][g(a->x) + offset] != '1')
 	{
-		a->x += step->x;
-		a->y += step->y;
+		a->x += step.x;
+		a->y += step.y;
 	}
 	return (a);
 }
@@ -118,21 +114,19 @@ double	bring_back(double a)
 
 void	render_wall(t_map *info, int x)
 {
-	t_point	*s;
-	t_point	*e;
+	t_point	s;
+	t_point	e;
 	double	pro_plan;
-	double	player_plan; 
+	double	player_plan;
 
-	s = malloc(sizeof(t_point));
-	e = malloc(sizeof(t_point));
 	player_plan = (WIDTH / 2) / tan(rad_switch(30));
 	info->dist_towall *= cos(info->ray_ang - info->player->angle);
 	pro_plan = (player_plan / info->dist_towall) * TILE;
-	s->x = x;
-	e->x = x;
-	s->y = bring_back((HEIGHT / 2) - (pro_plan / 2));
-	e->y = bring_back((HEIGHT / 2) + (pro_plan / 2));
-	dda_line(s, e, info);
+	s.x = x;
+	e.x = x;
+	s.y = bring_back((HEIGHT / 2) - (pro_plan / 2));
+	e.y = bring_back((HEIGHT / 2) + (pro_plan / 2));
+	dda_line(&s, &e, info);
 }
 void	render_rays(t_map *info, int x)
 {

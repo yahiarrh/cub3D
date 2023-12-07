@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/03 19:47:49 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/12/07 21:07:00 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ bool	num_val(char *f)
 		if (f[i] == ',')
 			flag++;
 		else if (f[i] != ' ' && f[i] != '\t' && !ft_isdigit(f[i]))
-			ft_putstr_fd("Error in elements\n", 2);
+		{
+		ft_putstr_fd("Error in elements\n", 2);
+		}
 		i++;
 	}
 	if (flag != 2)
@@ -60,11 +62,10 @@ bool	num_val(char *f)
 
 int	check_num(char *f)
 {
-	int	*r;
-	int	i;
-	int	j;
+	t_color	r;
+	int		i;
+	int		j;
 
-	r = malloc(sizeof(int) * 3);
 	i = 0;
 	j = 0;
 	while (!ft_isdigit(f[i]))
@@ -73,19 +74,20 @@ int	check_num(char *f)
 	{
 		if (f[i] == ',')
 			i++;
-		r[j] = ft_atoi(f + i);
-		if (r[j] > 255)
+		fill_color(&r, j, ft_atoi(f + i));
+		if (ft_atoi(f + i) > 255)
 			ft_putstr_fd("Numbers must in 0 & 255 range\n", 2);
 		j++;
 		while (f[i] && f[i] != '\n' && (ft_isdigit(f[i])
 				|| f[i] == ' ' || f[i] == '\t'))
 			i++;
 	}
-	return (r[0] << 16 | r[1] << 8 | r[2]);
+	return (r.r << 24 | r.b << 16 | r.g << 8 | 254);
 }
 
 bool	if_elements(t_elements **el, char *f, t_v *v)
 {
+
 	if (!ft_strncmp("NO", f, 2) && el_v(f + 2) && !v->n++)
 		(*el)->n = ft_substr(f, ft_start(f + 2, 0), 
 				ft_strchr(f, '\n') - ft_start(f + 2, 0));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/04 20:58:40 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/12/07 21:07:20 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef	struct s_point
 typedef struct s_player
 {
 	t_point *p;
-	int r;
+	int 	r;
 	double angle; 
 	double speed;
 	double rotspeed;
@@ -77,17 +77,26 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	mlx_t   *mlx;
-	mlx_image_t   *img;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	mlx_image_t	*txt;
+	mlx_texture_t *t;
 	t_elements	*e;
 	t_player	*player;
 	char		**map;
 	int			col;
 	double		ray_ang;
-	double	dist_towall;
+	double		dist_towall;
 }t_map;
 
+typedef struct s_color{
+	int r;
+	int b;
+	int g;
+}t_color;
+
 void		check_file(const char *file_name, t_map *map);
+void		fill_color(t_color *c, int f, int color);
 t_elements	*check_el(char *f, t_map *map);
 void    	draw(mlx_image_t *img, char **map);
 int			check_num(char *f);

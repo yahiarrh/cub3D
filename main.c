@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/04 21:07:02 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/12/07 21:08:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	floor_ceiling(t_map *info)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				mlx_put_pixel(info->img, x, y, BLUE);
+				mlx_put_pixel(info->img, x, y, info->e->f);
 			else
-				mlx_put_pixel(info->img, x, y, GRAY);
+				mlx_put_pixel(info->img, x, y, info->e->c);
 			x++;
 		}
 		y++;
@@ -68,8 +68,8 @@ void	key_handle(void	*param)
 		mlx_close_window(info->mlx);
 	mlx_delete_image(info->mlx, info->img);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_F))
-		info->player->speed += 1;
-	if (mlx_is_key_down(info->mlx, MLX_KEY_UP))
+		info->player->speed += 0.2;
+	if (mlx_is_key_down(info->mlx, MLX_KEY_W))
 	{
 		e = cos(info->player->angle) * info->player->speed;
 		f = sin(info->player->angle) * info->player->speed;
@@ -79,7 +79,7 @@ void	key_handle(void	*param)
 			info->player->p->y += sin(info->player->angle) * info->player->speed;
 		}
 	}
-	if (mlx_is_key_down(info->mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(info->mlx, MLX_KEY_S))
 	{
 		e = cos(info->player->angle) * info->player->speed;
 		f = sin(info->player->angle) * info->player->speed;
@@ -90,9 +90,9 @@ void	key_handle(void	*param)
 		}
 	}
 	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
-		info->player->angle -= rad_switch(4.5);
+		info->player->angle -= rad_switch(3.5);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
-		info->player->angle += rad_switch(4.5);
+		info->player->angle += rad_switch(3.5);
 	info->img = mlx_new_image(info->mlx, 1920, 1080);
 	mlx_image_to_window(info->mlx, info->img, 0, 0);
 	render_3d(info);
@@ -109,6 +109,7 @@ int	main(int ac, char **av)
 	map = malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(map));
 	p_init(&map);
+	map->t = mlx_load_png("/Users/yrrhaibi/Desktop/cub3D/Wolf3D.png"); 
 	if (ac == 2)
 	{
 		if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
