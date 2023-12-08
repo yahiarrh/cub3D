@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:37:24 by msaidi            #+#    #+#             */
-/*   Updated: 2023/12/07 22:29:52 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:29:07 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ int	g(double a)
 	return (a / 64);
 }
 
+uint32_t	wich_ang(t_map *info)
+{
+	
+}
+
+double	calcul_y(t_map *info, int i)
+{
+	double	y;
+
+	i += (TILE / 2) - (HEIGHT / 2);
+
+	return(y);
+}
+
 void	dda_line(t_point *a, t_point *b, t_map	*info)
 {
 	double	i;
@@ -24,22 +38,23 @@ void	dda_line(t_point *a, t_point *b, t_map	*info)
 	t_point	p;
 	double	step;
 
-	i = 1;
+	i = (HEIGHT / 2) - (TILE / 2);
 	p.x = a->x;
 	p.y = a->y;
 	delta.x = b->x - a->x;
 	delta.y = b->y - a->y;
-	if (fabs(delta.x) > fabs(delta.y))
-		step = fabs(delta.x);
-	else
-		step = 	fabs(delta.y);
-	if (step == 0)
-		mlx_put_pixel(info->img, a->x, a->y, KHRA);
+	// if (fabs(delta.x) > fabs(delta.y))
+	// 	step = fabs(delta.x);
+	// else
+	// 	step = 	fabs(delta.y);
+	// if (step == 0)
+	// 	mlx_put_pixel(info->img, a->x, a->y, KHRA);
+	step = (HEIGHT / 2) + (TILE / 2);
 	while (i <= step)
 	{
-		mlx_put_pixel(info->img, round(p.x), round(p.y), KHRA);
-		p.x += delta.x / step;
-		p.y += delta.y / step;
+		mlx_put_pixel(info->img, p.x, p.y, KHRA);
+		p.x = calcul_x(info);
+		p.y = calcul_y(info, i);
 		i++;
 	}
 }
@@ -136,9 +151,15 @@ void	render_rays(t_map *info, int x)
 	hori = hori_inter(info);
 	verti = verti_inter(info);
 	if (ft_distance(info->player->p, hori) < ft_distance(info->player->p, verti))
+	{
 		info->dist_towall = ft_distance(info->player->p, hori);
+		info->is_ver = 0;
+	}
 	else
+	{
 		info->dist_towall = ft_distance(info->player->p, verti);
+		info->is_ver = 1;
+	}
 	render_wall(info, x);
 }
 

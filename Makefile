@@ -1,12 +1,12 @@
 NAME = cub3D
 
-SRC	=	parsing/parse.c parsing/utils_parse.c parsing/utils_parse2.c parsing/v_map.c main.c map.c player.c ray_cast.c
+SRC	=	parsing/parse.c parsing/utils_parse.c parsing/utils_parse2.c parsing/v_map.c main.c map.c player.c ray_cast.c init_texture.c
 
 GLFW = $(shell brew --prefix glfw)
 
 framG = -framework Cocoa -framework OpenGL -framework IOKit
 
-CFLAGS	= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -Ofast #-g -fsanitize=address
 
 CC		= cc
 

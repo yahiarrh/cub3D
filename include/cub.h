@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/07 22:37:02 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:37:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,27 @@ typedef struct s_player
 	double rotspeed;
 }t_player;
 
+
+typedef struct s_txt
+{
+	mlx_texture_t *no;
+	mlx_texture_t *so;
+	mlx_texture_t *ea;
+	mlx_texture_t *we;
+}t_txt;
+
 typedef struct s_map
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	mlx_texture_t *t;
+	t_txt		*t;
 	t_elements	*e;
 	t_player	*player;
 	char		**map;
 	int			col;
 	double		ray_ang;
 	double		dist_towall;
+	bool		is_ver;
 }t_map;
 
 typedef struct s_color{
@@ -121,5 +131,6 @@ void		cast_rays(t_map *info);
 void		dda_line(t_point *a, t_point *b, t_map	*map);
 double		rad_switch(double deg);
 int			g(double a);
+void		init_txt(t_map *t);
 
 #endif

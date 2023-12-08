@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/07 21:07:00 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:57:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,17 @@ bool	if_elements(t_elements **el, char *f, t_v *v)
 {
 
 	if (!ft_strncmp("NO", f, 2) && el_v(f + 2) && !v->n++)
-		(*el)->n = ft_substr(f, ft_start(f + 2, 0), 
-				ft_strchr(f, '\n') - ft_start(f + 2, 0));
+		(*el)->n = ft_substr(f + 2, ft_start(f + 2, 0), 
+				ft_strchr(f, '\n') - ft_start(f + 2, 0) - 2);
 	else if (!ft_strncmp("SO", f, 2) && el_v(f + 2) && !v->s++)
-		(*el)->s = ft_substr(f, ft_start(f + 2, 0),
-				ft_strchr(f, '\n') - ft_start(f + 2, 0));
+		(*el)->s = ft_substr(f + 2, ft_start(f + 2, 0), 
+				ft_strchr(f, '\n') - ft_start(f + 2, 0) - 2);
 	else if (!ft_strncmp("WE", f, 2) && el_v(f + 2) && !v->w++)
-		(*el)->w = ft_substr(f, ft_start(f + 2, 0),
-				ft_strchr(f, '\n') - ft_start(f + 2, 0));
+		(*el)->w = ft_substr(f + 2, ft_start(f + 2, 0), 
+				ft_strchr(f, '\n') - ft_start(f + 2, 0) - 2);
 	else if (!ft_strncmp("EA", f, 2) && el_v(f + 2) && !v->e++)
-		(*el)->e = ft_substr(f, ft_start(f + 2, 0),
-				ft_strchr(f, '\n') - ft_start(f + 2, 0));
+		(*el)->e = ft_substr(f + 2, ft_start(f + 2, 0), 
+				ft_strchr(f, '\n') - ft_start(f + 2, 0) - 2);
 	else if (!ft_strncmp("F", f, 1) && num_val(f + 1) && !v->f++)
 		(*el)->f = check_num(f);
 	else if (!ft_strncmp("C", f, 1) && num_val(f + 1) && !v->c++)
