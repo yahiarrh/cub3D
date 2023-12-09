@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 20:02:00 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:22:45 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,10 @@ void	key_handle(void	*param)
             info->player->p->y += f;
         }
     }
+	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
+		info->player->angle -= rad_switch(3.5);
+	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
+		info->player->angle += rad_switch(3.5);
 	mouse_fnc(info);
 	mlx_delete_image(info->mlx, info->img);
 	info->img = mlx_new_image(info->mlx, 1920, 1080);
