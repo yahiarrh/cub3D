@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 14:21:10 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 19:23:16 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,17 @@ typedef struct s_txt
 	mlx_texture_t *so;
 	mlx_texture_t *ea;
 	mlx_texture_t *we;
+	mlx_texture_t *txt1;
+	mlx_texture_t *txt2;
+	mlx_texture_t *n;
+	mlx_texture_t *n1;
 }t_txt;
 
 typedef struct s_map
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*txt;
 	t_txt		*t;
 	t_elements	*e;
 	t_player	*player;

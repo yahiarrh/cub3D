@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:35:50 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/08 17:02:28 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 19:50:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,7 @@ void	init_txt(t_map *info)
 	info->t->ea = mlx_load_png(info->e->e);
 	if (!info->t->ea)
 		ft_putstr_fd("", 2);
+	info->t->n = mlx_load_png("hold.png");
+	info->t->n1 = mlx_load_png("shoot.png");
+	info->t->txt1 = mlx_load_png("shoot1.png");
 }

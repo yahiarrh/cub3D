@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:37:24 by msaidi            #+#    #+#             */
-/*   Updated: 2023/12/09 14:31:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 16:34:38 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,19 @@ mlx_texture_t *which_c(t_map *info)
 }
 uint32_t	color(mlx_texture_t *img, unsigned int x, unsigned int y)
 {
-	uint32_t	*colour;
+	uint32_t	*color;
 
-	colour = (uint32_t *)img->pixels + ((y * img->width) + x);
-	return (*colour);
+	color = (uint32_t *)img->pixels + ((y * img->width) + x);
+	return (*color);
 }
 
+void	put_pixel(mlx_image_t *img, unsigned int x, unsigned int y, uint32_t c)
+{
+	uint32_t *p;
 
+	p = (uint32_t *)img->pixels + (sizeof(uint8_t) * (y * img->width) + x);
+	*p = c;
+}
 
 void	dda_line(t_point *a, t_point *b, t_map	*info)
 {
@@ -114,9 +120,8 @@ void	dda_line(t_point *a, t_point *b, t_map	*info)
 	a->x = calcul_x(info);
 	while (i <= step)
 	{
-		// printf("Y1 :: %f Y2 :: %f\n", p.y, a->y);
 		a->y = calcul_y(info, p.y, b->y);
-		mlx_put_pixel(info->img, round(p.x), round(p.y), color(which_c(info), a->x, a->y));
+		put_pixel(info->img, round(p.x), round(p.y), color(which_c(info), a->x, a->y));
 		p.x += delta.x / step;
 		p.y += delta.y / step;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 14:15:47 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:02:00 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,49 @@ void	render_3d(t_map *info)
 	// draw_player(info->img, info);
 }
 
+void    mouse_fnc(void    *param)
+{
+    t_map    *info = param;
+    int        x;
+    int        y;
+
+    mlx_get_mouse_pos(info->mlx, &x, &y);
+    x -= WIDTH / 2;
+    info->player->angle += (double)x / WIDTH;
+    mlx_set_mouse_pos(info->mlx, WIDTH / 2, HEIGHT / 2);
+}
+
+void	change_txt(t_map *info, int flag)
+{
+	if (flag == 1)
+	{
+		mlx_delete_image(info->mlx, info->txt);
+		info->txt = mlx_texture_to_image(info->mlx, info->t->n1);
+		mlx_image_to_window(info->mlx, info->txt, 500, 450);
+	}
+	else
+	{
+		mlx_delete_image(info->mlx, info->txt);
+		info->txt = mlx_texture_to_image(info->mlx, info->t->n);
+		mlx_image_to_window(info->mlx, info->txt, 500, 450);
+	}
+}
+void	key_change(mlx_key_data_t key, void *par)
+{
+	t_map	*info;
+
+	info = par;
+	if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
+		change_txt(info, 1);
+	if (key.key == MLX_KEY_SPACE && key.action == MLX_RELEASE)
+		change_txt(info, 0);
+}
 void	key_handle(void	*param)
 {
 	t_map	*info = param;
 	double	e;
 	double	f;
+
 	if (mlx_is_key_down(info->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(info->mlx);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_F))
@@ -81,24 +119,44 @@ void	key_handle(void	*param)
 		}
 	}
 	if (mlx_is_key_down(info->mlx, MLX_KEY_S))
-	{
-		e = cos(info->player->angle) * info->player->speed;
-		f = sin(info->player->angle) * info->player->speed;
-		if (no_wall(info, &(t_point){info->player->p->x - e, info->player->p->y - f}))
-		{
-			info->player->p->x -= cos(info->player->angle) * info->player->speed;
-			info->player->p->y -= sin(info->player->angle) * info->player->speed;
-		}
-	}
-	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
-		info->player->angle -= rad_switch(3.5);
-	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
-		info->player->angle += rad_switch(3.5);
+    {
+        e = cos(info->player->angle) * info->player->speed;
+        f = sin(info->player->angle) * info->player->speed;
+        if (no_wall(info, &(t_point){info->player->p->x - e, info->player->p->y - f}))
+        {
+            info->player->p->x -= e;
+            info->player->p->y -= f;
+        }
+    }
+    if (mlx_is_key_down(info->mlx, MLX_KEY_A))
+    {
+        e = cos(info->player->angle + rad_switch(90)) * info->player->speed;
+        f = sin(info->player->angle + rad_switch(90)) * info->player->speed;
+        if (no_wall(info, &(t_point){info->player->p->x - e, info->player->p->y - f}))
+        {
+            info->player->p->x -= e;
+            info->player->p->y -= f;
+        }
+    }
+    if (mlx_is_key_down(info->mlx, MLX_KEY_D))
+    {
+        e = cos(info->player->angle + rad_switch(90)) * info->player->speed;
+        f = sin(info->player->angle + rad_switch(90)) * info->player->speed;
+        if (no_wall(info, &(t_point){e + info->player->p->x, f + info->player->p->y}))
+        {
+            info->player->p->x += e;
+            info->player->p->y += f;
+        }
+    }
+	mouse_fnc(info);
 	mlx_delete_image(info->mlx, info->img);
 	info->img = mlx_new_image(info->mlx, 1920, 1080);
 	mlx_image_to_window(info->mlx, info->img, 0, 0);
+	mlx_set_instance_depth(info->img->instances, 0);
 	render_3d(info);
 }
+
+
 
 int	main(int ac, char **av)
 {
@@ -118,7 +176,9 @@ int	main(int ac, char **av)
 		map->mlx = mlx_init(1920, 1080, "CUB", false);
 		map->img = mlx_new_image(map->mlx, 1920, 1080);
 		mlx_image_to_window(map->mlx, map->img, 0, 0);
+		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
 		mlx_loop_hook(map->mlx, &key_handle, map);
+		mlx_key_hook(map->mlx, &key_change, map);
 		mlx_loop(map->mlx);
 		mlx_terminate(map->mlx);
 	}
