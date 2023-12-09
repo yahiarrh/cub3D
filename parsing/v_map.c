@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/08 21:13:46 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 21:34:56 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	v_walls(char **f)
 }
 
 bool	cha_v2(char c)
-{	
+{
 	if (c == '0' || c == 'N' || c == 'S'
 		|| c == 'W' || c == 'E')
 		return (true);
@@ -73,12 +73,15 @@ void	p_info(t_map **map, int x, int y, char c)
 
 void	v_body_help(char **map, int i, int j)
 {
-	if (!cha_v(map[i][j]))
-		ft_putstr_fd("Probleme in map\n", 2);
 	if (!j && cha_v2(map[i][j]) && (!cha_v(map[i - 1][j])
 		|| !cha_v(map[i + 1][j]) || !cha_v(map[i][j + 1])))
+	{
+		puts("HNA1");
 		ft_putstr_fd("Probleme in map\n", 2);
+	}
 	else if (j && cha_v2(map[i][j]) && (!cha_v(map[i - 1][j])
 			|| !cha_v(map[i + 1][j]) || !cha_v(map[i][j + 1])))
+	{
 		ft_putstr_fd("Probleme in map\n", 2);
+	}
 }

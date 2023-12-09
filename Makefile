@@ -6,7 +6,7 @@ GLFW = $(shell brew --prefix glfw)
 
 framG = -framework Cocoa -framework OpenGL -framework IOKit
 
-CFLAGS	= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -Ofast #-g -fsanitize=address
 
 CC		= cc
 

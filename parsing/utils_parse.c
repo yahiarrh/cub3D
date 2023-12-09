@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/08 16:57:44 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 22:54:40 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,30 @@ void	v_map(t_map **map)
 bool	num_val(char *f)
 {
 	int	i;
-	int	flag;
+	char	**s;
+
 
 	i = 0;
-	flag = 0;
-	while (f[i] && f[i] != '\n')
-	{
-		if (f[i] == ',')
-			flag++;
-		else if (f[i] != ' ' && f[i] != '\t' && !ft_isdigit(f[i]))
-		{
-		ft_putstr_fd("Error in elements\n", 2);
-		}
-		i++;
-	}
-	if (flag != 2)
-		ft_putstr_fd("It must be N,N,N\n", 2);
+	s = ft_split(f, ',');
+	exit(0);
+	// while (f[i] == ' ' || f[i] ==  '\t')
+	// 	i++;
+	// while (f[i] && f[i] != '\n')
+	// {
+	// 	while (ft_isdigit(f[i]))
+	// 		i++;
+	// 	while (f[i] == ' ' || f[i] ==  '\t')
+	// 		i++;
+	// 	if (f[i] != ',' && flag < 2)
+	// 		ft_putstr_fd("probleme in colors\n", 2);
+	// 	if (f[i] == ',')
+	// 	{
+	// 		flag++;
+	// 		i++;
+	// 	}
+	// }
+	// if (flag != 2)
+	// 	ft_putstr_fd("It must be N,N,N\n", 2);
 	return (1);
 }
 
@@ -87,7 +95,10 @@ int	check_num(char *f)
 
 bool	if_elements(t_elements **el, char *f, t_v *v)
 {
+	int i = 0;
 
+	while (f[i] == ' ' || f[i] == '\t')
+			i++;
 	if (!ft_strncmp("NO", f, 2) && el_v(f + 2) && !v->n++)
 		(*el)->n = ft_substr(f + 2, ft_start(f + 2, 0), 
 				ft_strchr(f, '\n') - ft_start(f + 2, 0) - 2);
@@ -100,9 +111,9 @@ bool	if_elements(t_elements **el, char *f, t_v *v)
 	else if (!ft_strncmp("EA", f, 2) && el_v(f + 2) && !v->e++)
 		(*el)->e = ft_substr(f + 2, ft_start(f + 2, 0), 
 				ft_strchr(f, '\n') - ft_start(f + 2, 0) - 2);
-	else if (!ft_strncmp("F", f, 1) && num_val(f + 1) && !v->f++)
+	else if (!ft_strncmp("F", f, 1) && num_val(ft_substr(f + 1, 0, ft_strchr(f, '\n') - 1)) && !v->f++)
 		(*el)->f = check_num(f);
-	else if (!ft_strncmp("C", f, 1) && num_val(f + 1) && !v->c++)
+	else if (!ft_strncmp("C", f, 1) && num_val(ft_substr(f + 1, 0, ft_strchr(f, '\n') - 1)) && !v->c++)
 		(*el)->c = check_num(f);
 	else
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/07 21:06:44 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 21:02:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,21 @@ int	body_len(char *f)
 void	fill_map(t_map **map, char *f)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (f[i] && (f[i] == '\n' || f[i] == ' ' || f[i] ==  '\t'))
+	{
+		if (f[i] == '\n')
+			j = i;
 		i++;
+	}
 	if (!f[i])
 		ft_putstr_fd("No map\n", 2);
 	if (f[i] != '1')
 		ft_putstr_fd("Element externe\n", 2);
-	(*map)->map = ft_split(f + i, '\n');
+	(*map)->map = ft_split(f + j, '\n');
 	trim_spc(map);
 	v_map(map);
 }
@@ -74,8 +80,6 @@ t_elements	*check_el(char *f, t_map *map)
 	while (f[i])
 	{
 		while (f[i] == '\n')
-			i++;
-		while (f[i] == ' ' || f[i] == '\t')
 			i++;
 		if (!if_elements(&el, f + i, &v))
 			break ;
