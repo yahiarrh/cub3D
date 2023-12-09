@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/08 16:37:44 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 14:21:10 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_player
 	int 	r;
 	double angle; 
 	double speed;
-	double rotspeed;
+	double in_p;
 }t_player;
 
 
@@ -96,6 +96,7 @@ typedef struct s_map
 	double		ray_ang;
 	double		dist_towall;
 	bool		is_ver;
+	double		wsh;
 }t_map;
 
 typedef struct s_color{

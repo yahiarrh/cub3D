@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/08 16:51:59 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 14:15:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	render_3d(t_map *info)
 {
 	floor_ceiling(info);
 	cast_rays(info);
-	draw(info->img, info->map);
-	draw_player(info->img, info);
+	// draw(info->img, info->map);
+	// draw_player(info->img, info);
 }
 
 void	key_handle(void	*param)
@@ -68,7 +68,6 @@ void	key_handle(void	*param)
 	double	f;
 	if (mlx_is_key_down(info->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(info->mlx);
-	mlx_delete_image(info->mlx, info->img);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_F))
 		info->player->speed += 0.2;
 	if (mlx_is_key_down(info->mlx, MLX_KEY_W))
@@ -95,6 +94,7 @@ void	key_handle(void	*param)
 		info->player->angle -= rad_switch(3.5);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
 		info->player->angle += rad_switch(3.5);
+	mlx_delete_image(info->mlx, info->img);
 	info->img = mlx_new_image(info->mlx, 1920, 1080);
 	mlx_image_to_window(info->mlx, info->img, 0, 0);
 	render_3d(info);

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/06 15:07:09 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/08 21:13:46 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	trim_spc(t_map **map)
 void	p_info(t_map **map, int x, int y, char c)
 {
 	(*map)->player->p = malloc(sizeof(t_point));
-	(*map)->player->p->x = x * 64 + 32;
-	(*map)->player->p->y = y * 64 + 32;
+	(*map)->player->p->x = x * TILE + TILE / 2;
+	(*map)->player->p->y = y * TILE + TILE / 2;
 
 	if (c == 'N')
 		(*map)->player->angle = 3*M_PI/2;

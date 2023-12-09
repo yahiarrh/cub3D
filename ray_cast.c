@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:37:24 by msaidi            #+#    #+#             */
-/*   Updated: 2023/12/08 17:29:07 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/09 14:31:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,84 @@
 
 int	g(double a)
 {
-	return (a / 64);
+	return (a / TILE);
 }
 
-uint32_t	wich_ang(t_map *info)
+int	which_h(t_map *info)
 {
-	
-}
+	double	an;
 
-double	calcul_y(t_map *info, int i)
+	an = info->ray_ang;
+	if (sin(an) <= 0 && !info->is_ver)
+		return(info->t->so->height);
+	else if (sin(an) > 0 && !info->is_ver)
+		return(info->t->no->height);
+	if (cos(an) <= 0 && info->is_ver)
+		return(info->t->we->height);
+	else if (cos(an) > 0 && info->is_ver)
+		return(info->t->ea->height);
+	return(0.0);
+}
+int	which_w(t_map *info)
 {
-	double	y;
+	double	an;
 
-	i += (TILE / 2) - (HEIGHT / 2);
-
-	return(y);
+	an = info->ray_ang;
+	if (sin(an) <= 0 && !info->is_ver)
+		return(info->t->so->width);
+	else if (sin(an) > 0 && !info->is_ver)
+		return(info->t->no->width);
+	if (cos(an) <= 0 && info->is_ver)
+		return(info->t->we->width);
+	else if (cos(an) > 0 && info->is_ver)
+		return(info->t->ea->width);
+	return(0.0);
 }
+
+int	calcul_x(t_map *info)
+{
+	int	x;
+	int	xt;
+
+	x = fmod(info->player->in_p, TILE);
+	xt = x * (which_w(info) / TILE);
+	return (xt);
+}
+
+
+double	calcul_y(t_map *info, double y1, double y2)
+{
+	double ytext;
+	// printf("Y1 :: %f Y2 :: %f\n", y1,y2);
+	y2 = y1 + ((info->wsh / 2) - (HEIGHT / 2));
+	ytext = y2 * which_h(info) / info->wsh;
+	return (ytext);
+}
+
+mlx_texture_t *which_c(t_map *info)
+{
+	double		an;
+
+	an = info->ray_ang;
+	if (!info->is_ver && sin(an) <= 0)
+		return(info->t->so);
+	if (!info->is_ver && sin(an) > 0)
+		return(info->t->no);
+	if (info->is_ver && cos(an) > 0)
+		return(info->t->ea);
+	if (info->is_ver && cos(an) <= 0)
+		return(info->t->we);
+	return(NULL);
+}
+uint32_t	color(mlx_texture_t *img, unsigned int x, unsigned int y)
+{
+	uint32_t	*colour;
+
+	colour = (uint32_t *)img->pixels + ((y * img->width) + x);
+	return (*colour);
+}
+
+
 
 void	dda_line(t_point *a, t_point *b, t_map	*info)
 {
@@ -38,23 +100,25 @@ void	dda_line(t_point *a, t_point *b, t_map	*info)
 	t_point	p;
 	double	step;
 
-	i = (HEIGHT / 2) - (TILE / 2);
+	i = 1;
 	p.x = a->x;
 	p.y = a->y;
 	delta.x = b->x - a->x;
 	delta.y = b->y - a->y;
-	// if (fabs(delta.x) > fabs(delta.y))
-	// 	step = fabs(delta.x);
-	// else
-	// 	step = 	fabs(delta.y);
-	// if (step == 0)
-	// 	mlx_put_pixel(info->img, a->x, a->y, KHRA);
-	step = (HEIGHT / 2) + (TILE / 2);
+	if (fabs(delta.x) > fabs(delta.y))
+		step = fabs(delta.x);
+	else
+		step = 	fabs(delta.y);
+	if (step == 0)
+		mlx_put_pixel(info->img, a->x, a->y, KHRA);
+	a->x = calcul_x(info);
 	while (i <= step)
 	{
-		mlx_put_pixel(info->img, p.x, p.y, KHRA);
-		p.x = calcul_x(info);
-		p.y = calcul_y(info, i);
+		// printf("Y1 :: %f Y2 :: %f\n", p.y, a->y);
+		a->y = calcul_y(info, p.y, b->y);
+		mlx_put_pixel(info->img, round(p.x), round(p.y), color(which_c(info), a->x, a->y));
+		p.x += delta.x / step;
+		p.y += delta.y / step;
 		i++;
 	}
 }
@@ -66,12 +130,12 @@ t_point	*hori_inter(t_map *info)
 	int		offset;
 
 	a = malloc(sizeof(t_point));
-	a->y = floor(info->player->p->y / 64) * 64;
-	step.y = -64;
+	a->y = floor(info->player->p->y / TILE) * TILE;
+	step.y = -TILE;
 	offset = -1;
 	if (sin(info->ray_ang) > 0)
 	{
-		a->y += 64;
+		a->y += TILE;
 		step.y *= -1;
 		offset = 0;
 	}
@@ -94,13 +158,13 @@ t_point	*verti_inter(t_map *info)
 	int		offset;
 	
 	a = malloc(sizeof(t_point));
-	a->x = floor(info->player->p->x / 64) * 64;
-	step.x = -64;
+	a->x = floor(info->player->p->x / TILE) * TILE;
+	step.x = -TILE;
 	offset = -1;
 	if (cos(info->ray_ang) > 0)
 	{
 		offset = 0;
-		(a->x += 64) && (step.x *= (-1));
+		(a->x += TILE) && (step.x *= (-1));
 	}
 	a->y = tan(info->ray_ang) * (a->x - info->player->p->x) + info->player->p->y;
 	step.y = tan(info->ray_ang) * step.x;
@@ -131,16 +195,16 @@ void	render_wall(t_map *info, int x)
 {
 	t_point	s;
 	t_point	e;
-	double	pro_plan;
 	double	player_plan;
+	
 
 	player_plan = (WIDTH / 2) / tan(rad_switch(30));
 	info->dist_towall *= cos(info->ray_ang - info->player->angle);
-	pro_plan = (player_plan / info->dist_towall) * TILE;
+	info->wsh = (TILE / info->dist_towall) * player_plan;
 	s.x = x;
 	e.x = x;
-	s.y = bring_back((HEIGHT / 2) - (pro_plan / 2));
-	e.y = bring_back((HEIGHT / 2) + (pro_plan / 2));
+	s.y = bring_back((HEIGHT / 2) - (info->wsh / 2));
+	e.y = bring_back((HEIGHT / 2) + (info->wsh / 2));
 	dda_line(&s, &e, info);
 }
 void	render_rays(t_map *info, int x)
@@ -154,11 +218,13 @@ void	render_rays(t_map *info, int x)
 	{
 		info->dist_towall = ft_distance(info->player->p, hori);
 		info->is_ver = 0;
+		info->player->in_p = hori->x;
 	}
 	else
 	{
 		info->dist_towall = ft_distance(info->player->p, verti);
 		info->is_ver = 1;
+		info->player->in_p = verti->y;
 	}
 	render_wall(info, x);
 }
