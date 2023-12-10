@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:14:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 22:21:17 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:34:59 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,16 @@ int	ft_start(char *f, int flag)
 	}
 	else
 	{
-		i = ft_strchr(f, '\n');
-		if (i)
-			i--;
-		while (i && (f[i] == ' ' || f[i] == '\t'))
-			i--;
+		while (f[i] && f[i] != '\n')
+		{
+			if (!ft_strchr1(" \t,", f[i]) && !ft_isdigit(f[i]))
+				ft_putstr_fd("C && F must be nums", 2);
+			i++;
+		}
 	}
 	return (i);
 }
+
 int	count_word(char **f)
 {
 	int	i;
@@ -76,7 +78,6 @@ void	v_body(t_map **map)
 	while ((*map)->map[i])
 	{
 		j = 0;
-
 		while ((*map)->map[i][j] && ft_strchr1("NSEW01\t ", (*map)->map[i][j]))
 		{
 			v_body_help((*map)->map, i, j);

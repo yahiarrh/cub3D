@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 20:22:45 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/10 22:16:49 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,7 @@ double	rad_switch(double deg)
 {
 	return (deg * M_PI / 180);
 }
-bool	no_wall(t_map *info, t_point *a)
-{
-	int	i;
 
-	i = -1;
-	while (i++ < 3)
-	{
-		if (info->map[g(a->y + i)][g(a->x + i)] == '1')
-			return (0);
-		if (info->map[g(a->y)][g(a->x + i)] == '1')
-			return (0);
-		if (info->map[g(a->y - i)][g(a->x)] == '1')
-			return (0);
-	}
-	return (1);
-}
 void	floor_ceiling(t_map *info)
 {
 	int	x;
@@ -45,131 +30,55 @@ void	floor_ceiling(t_map *info)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				mlx_put_pixel(info->img, x, y, info->e->f);
-			else
 				mlx_put_pixel(info->img, x, y, info->e->c);
+			else
+				mlx_put_pixel(info->img, x, y, info->e->f);
 			x++;
 		}
 		y++;
 	}
 }
+
 void	render_3d(t_map *info)
 {
 	floor_ceiling(info);
 	cast_rays(info);
-	// draw(info->img, info->map);
-	// draw_player(info->img, info);
 }
 
-void    mouse_fnc(void    *param)
-{
-    t_map    *info = param;
-    int        x;
-    int        y;
-
-    mlx_get_mouse_pos(info->mlx, &x, &y);
-    x -= WIDTH / 2;
-    info->player->angle += (double)x / WIDTH;
-    mlx_set_mouse_pos(info->mlx, WIDTH / 2, HEIGHT / 2);
-}
-
-void	change_txt(t_map *info, int flag)
-{
-	if (flag == 1)
-	{
-		mlx_delete_image(info->mlx, info->txt);
-		info->txt = mlx_texture_to_image(info->mlx, info->t->n1);
-		mlx_image_to_window(info->mlx, info->txt, 500, 450);
-	}
-	else
-	{
-		mlx_delete_image(info->mlx, info->txt);
-		info->txt = mlx_texture_to_image(info->mlx, info->t->n);
-		mlx_image_to_window(info->mlx, info->txt, 500, 450);
-	}
-}
-void	key_change(mlx_key_data_t key, void *par)
+void	key_handle(void	*param)
 {
 	t_map	*info;
 
-	info = par;
-	if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
-		change_txt(info, 1);
-	if (key.key == MLX_KEY_SPACE && key.action == MLX_RELEASE)
-		change_txt(info, 0);
-}
-void	key_handle(void	*param)
-{
-	t_map	*info = param;
-	double	e;
-	double	f;
-
+	info = param;
 	if (mlx_is_key_down(info->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(info->mlx);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_F))
-		info->player->speed += 0.2;
-	if (mlx_is_key_down(info->mlx, MLX_KEY_W))
-	{
-		e = cos(info->player->angle) * info->player->speed;
-		f = sin(info->player->angle) * info->player->speed;
-		if (no_wall(info, &(t_point){e + info->player->p->x, f + info->player->p->y}))
-		{
-			info->player->p->x += cos(info->player->angle) * info->player->speed;
-			info->player->p->y += sin(info->player->angle) * info->player->speed;
-		}
-	}
-	if (mlx_is_key_down(info->mlx, MLX_KEY_S))
-    {
-        e = cos(info->player->angle) * info->player->speed;
-        f = sin(info->player->angle) * info->player->speed;
-        if (no_wall(info, &(t_point){info->player->p->x - e, info->player->p->y - f}))
-        {
-            info->player->p->x -= e;
-            info->player->p->y -= f;
-        }
-    }
-    if (mlx_is_key_down(info->mlx, MLX_KEY_A))
-    {
-        e = cos(info->player->angle + rad_switch(90)) * info->player->speed;
-        f = sin(info->player->angle + rad_switch(90)) * info->player->speed;
-        if (no_wall(info, &(t_point){info->player->p->x - e, info->player->p->y - f}))
-        {
-            info->player->p->x -= e;
-            info->player->p->y -= f;
-        }
-    }
-    if (mlx_is_key_down(info->mlx, MLX_KEY_D))
-    {
-        e = cos(info->player->angle + rad_switch(90)) * info->player->speed;
-        f = sin(info->player->angle + rad_switch(90)) * info->player->speed;
-        if (no_wall(info, &(t_point){e + info->player->p->x, f + info->player->p->y}))
-        {
-            info->player->p->x += e;
-            info->player->p->y += f;
-        }
-    }
+		info->player->speed = 9;
+	if (mlx_is_key_down(info->mlx, MLX_KEY_G))
+		info->player->speed = 4;
 	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
-		info->player->angle -= rad_switch(3.5);
+		info->player->angle -= rad_switch(2);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
-		info->player->angle += rad_switch(3.5);
-	mouse_fnc(info);
+		info->player->angle += rad_switch(2);
+	move(info);
+	move2(info);
+	if (info->mo)
+		mouse_fnc(info);
 	mlx_delete_image(info->mlx, info->img);
-	info->img = mlx_new_image(info->mlx, 1920, 1080);
+	info->img = mlx_new_image(info->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(info->mlx, info->img, 0, 0);
 	mlx_set_instance_depth(info->img->instances, 0);
 	render_3d(info);
 }
 
-
-
 int	main(int ac, char **av)
 {
 	t_map	*map;
-	int	i;
+	int		i;
 
 	i = 0;
-	map = malloc(sizeof(t_map));
-	ft_memset(map, 0, sizeof(map));
+	map = get_ptr(sizeof(t_map), 1);
+	ft_memset(map, 0, sizeof(t_map));
 	p_init(&map);
 	if (ac == 2)
 	{
@@ -177,13 +86,15 @@ int	main(int ac, char **av)
 			ft_putstr_fd("File must be .cub\n", 2);
 		check_file(av[1], map);
 		init_txt(map);
-		map->mlx = mlx_init(1920, 1080, "CUB", false);
-		map->img = mlx_new_image(map->mlx, 1920, 1080);
+		map->mlx = mlx_init(WIDTH, HEIGHT, "CUB", false);
+		map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
 		mlx_image_to_window(map->mlx, map->img, 0, 0);
 		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
-		mlx_loop_hook(map->mlx, &key_handle, map);
 		mlx_key_hook(map->mlx, &key_change, map);
+		mlx_loop_hook(map->mlx, &key_handle, map);
 		mlx_loop(map->mlx);
 		mlx_terminate(map->mlx);
+		destroy_txt(map);
+		get_ptr(0, 0);
 	}
 }

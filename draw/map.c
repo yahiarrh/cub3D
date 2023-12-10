@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:23:27 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 17:33:53 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:17:34 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub.h"
+#include "../include/cub.h"
 
 void	draw_cube(mlx_image_t *img, int i, int j, uint32_t c)
 {
@@ -30,13 +30,12 @@ void	draw_cube(mlx_image_t *img, int i, int j, uint32_t c)
 	}
 }
 
-void    draw(mlx_image_t *img, char **map)
+void	draw(mlx_image_t *img, char **map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
-	
 	while (map[x])
 	{
 		y = 0;

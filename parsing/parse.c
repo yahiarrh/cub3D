@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:21:40 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 21:02:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:51:14 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	fill_map(t_map **map, char *f)
 
 	i = 0;
 	j = 0;
-	while (f[i] && (f[i] == '\n' || f[i] == ' ' || f[i] ==  '\t'))
+	while (f[i] && (f[i] == '\n' || f[i] == ' ' || f[i] == '\t'))
 	{
 		if (f[i] == '\n')
 			j = i;
@@ -74,7 +74,7 @@ t_elements	*check_el(char *f, t_map *map)
 	int			i;
 
 	i = 0;
-	el = malloc(sizeof(t_elements));
+	el = get_ptr(sizeof(t_elements), 1);
 	ft_memset(el, 0, sizeof(el));
 	ft_memset(&v, 0, sizeof(t_v));
 	while (f[i])
@@ -95,7 +95,7 @@ void	check_file(const char *file_name, t_map *map)
 {
 	t_file	f;
 
-	ft_memset(&f,0, sizeof(t_file));
+	ft_memset(&f, 0, sizeof(t_file));
 	f.fd = open(file_name, O_RDONLY);
 	f.n = 1;
 	if (f.fd < 0)
@@ -108,9 +108,7 @@ void	check_file(const char *file_name, t_map *map)
 		f.n = read(f.fd, f.buff, 9);
 		if (f.n < 0)
 			exit (1);
-		f.tmp = f.s;
 		f.s = ft_strjoin(f.s, f.buff);
-		free(f.tmp);
 		free(f.buff);
 	}
 	close(f.fd);

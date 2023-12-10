@@ -6,15 +6,23 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:35:50 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 19:50:47 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:55:46 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub.h"
+#include "../include/cub.h"
+
+void	valid_pl_col(int j, int flag)
+{
+	if (flag != 2)
+		ft_putstr_fd("It must be N,N,N\n", 2);
+	if (j != 3)
+		ft_putstr_fd("It must be 3 nums\n", 2);
+}
 
 void	init_txt(t_map *info)
 {
-	info->t = malloc(sizeof(t_txt));
+	info->t = get_ptr(sizeof(t_txt), 1);
 	ft_memset(info->t, 0, sizeof(t_txt));
 	info->t->no = mlx_load_png(info->e->n);
 	if (!info->t->no)
@@ -28,7 +36,33 @@ void	init_txt(t_map *info)
 	info->t->ea = mlx_load_png(info->e->e);
 	if (!info->t->ea)
 		ft_putstr_fd("", 2);
-	info->t->n = mlx_load_png("hold.png");
-	info->t->n1 = mlx_load_png("shoot.png");
-	info->t->txt1 = mlx_load_png("shoot1.png");
+	info->t->n = mlx_load_png("pngs/hold.png");
+	info->t->n1 = mlx_load_png("pngs/shoot.png");
+}
+
+bool	no_wall(t_map *info, t_point *a)
+{
+	int	i;
+
+	i = -1;
+	while (i++ < 3)
+	{
+		if (info->map[g(a->y + i)][g(a->x + i)] == '1')
+			return (0);
+		if (info->map[g(a->y)][g(a->x + i)] == '1')
+			return (0);
+		if (info->map[g(a->y - i)][g(a->x)] == '1')
+			return (0);
+	}
+	return (1);
+}
+
+void	destroy_txt(t_map *map)
+{
+	mlx_delete_texture(map->t->ea);
+	mlx_delete_texture(map->t->no);
+	mlx_delete_texture(map->t->we);
+	mlx_delete_texture(map->t->so);
+	mlx_delete_texture(map->t->n);
+	mlx_delete_texture(map->t->n1);
 }

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/09 21:34:56 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:51:22 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	v_walls(char **f)
 {
-	int i;
-	int s;
-	int l;
+	int	i;
+	int	s;
+	int	l;
 
 	i = 1;
 	while (f[i])
@@ -36,6 +36,7 @@ bool	cha_v2(char c)
 		return (true);
 	return (false);
 }
+
 void	trim_spc(t_map **map)
 {
 	int	i;
@@ -47,7 +48,7 @@ void	trim_spc(t_map **map)
 		j = ft_strlen((*map)->map[i]);
 		while (j && !cha_v((*map)->map[i][j]))
 		{
-			if ((*map)->map[i][j] == ' ' ||  (*map)->map[i][j] == '\t')
+			if ((*map)->map[i][j] == ' ' || (*map)->map[i][j] == '\t')
 				(*map)->map[i][j] = '\0';
 			j--;
 		}
@@ -57,14 +58,13 @@ void	trim_spc(t_map **map)
 
 void	p_info(t_map **map, int x, int y, char c)
 {
-	(*map)->player->p = malloc(sizeof(t_point));
+	(*map)->player->p = get_ptr(sizeof(t_point), 1);
 	(*map)->player->p->x = x * TILE + TILE / 2;
 	(*map)->player->p->y = y * TILE + TILE / 2;
-
 	if (c == 'N')
-		(*map)->player->angle = 3*M_PI/2;
+		(*map)->player->angle = 3 * M_PI / 2;
 	else if (c == 'S')
-		(*map)->player->angle = M_PI/2;
+		(*map)->player->angle = M_PI / 2;
 	else if (c == 'W')
 		(*map)->player->angle = M_PI;
 	else if (c == 'E')
