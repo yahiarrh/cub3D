@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:15:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/10 16:39:45 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:12:09 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	v_map(t_map **map)
 		i++;
 	}
 	v_walls((*map)->map);
-	v_body(map);
 	i = 0;
 	while ((*map)->map[l][i])
 	{
@@ -38,6 +37,7 @@ void	v_map(t_map **map)
 			ft_putstr_fd("Probleme in walls\n", 2);
 		i++;
 	}
+	v_body(map);
 }
 
 bool	num_val(char *f)

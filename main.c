@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/11 13:51:41 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:24:00 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int ac, char **av)
 			ft_putstr_fd("File must be .cub\n", 2);
 		check_file(av[1], map);
 		init_txt(map);
-		map->mlx = mlx_init(WIDTH, HEIGHT, "CUB", false);
+		map->mlx = mlx_init(WIDTH, HEIGHT, "CUB", 0);
 		map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
 		mlx_image_to_window(map->mlx, map->img, 0, 0);
 		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);

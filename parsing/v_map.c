@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:56:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/10 18:51:22 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:09:36 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ void	v_body_help(char **map, int i, int j)
 {
 	if (!j && cha_v2(map[i][j]) && (!cha_v(map[i - 1][j])
 		|| !cha_v(map[i + 1][j]) || !cha_v(map[i][j + 1])))
-	{
-		puts("HNA1");
 		ft_putstr_fd("Probleme in map\n", 2);
-	}
 	else if (j && cha_v2(map[i][j]) && (!cha_v(map[i - 1][j])
 			|| !cha_v(map[i + 1][j]) || !cha_v(map[i][j + 1])))
 	{
