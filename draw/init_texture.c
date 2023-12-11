@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:35:50 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/10 18:55:46 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 12:57:40 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	no_wall(t_map *info, t_point *a)
 	int	i;
 
 	i = -1;
-	while (i++ < 3)
+	while (i++ < 5)
 	{
 		if (info->map[g(a->y + i)][g(a->x + i)] == '1')
 			return (0);

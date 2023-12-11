@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/10 20:35:13 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:00:27 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,11 @@ int				g(double a);
 void			init_txt(t_map *t);
 mlx_texture_t	*which_c(t_map *info);
 void			valid_pl_col(int j, int flag);
-int				which_w(t_map *info);
-int				which_h(t_map *info);
+uint32_t		which_w(t_map *info);
+uint32_t		which_h(t_map *info);
 int				wall_check(t_map *info, t_point *a, int offset, int flag);
-double			calcul_y(t_map *info, double y1, double y2);
-int				calcul_x(t_map *info);
+double			calcul_y(t_map *info, double y1);
+double			calcul_x(t_map *info);
 int				g(double a);
 double			bring_back(double a);
 double			ft_distance(t_point	*a, t_point *b);

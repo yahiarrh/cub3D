@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:22:14 by msaidi            #+#    #+#             */
-/*   Updated: 2023/12/10 18:51:06 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:51:59 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	p_init(t_map **map)
 	(*map)->player = get_ptr(sizeof(t_player), 1);
 	ft_memset((*map)->player, 0, sizeof(t_player));
 	(*map)->player->r = 5;
-	(*map)->player->speed = 4;
+	(*map)->player->speed = 3.5;
 }
 
 void	draw_player(mlx_image_t *img, t_map *coor)

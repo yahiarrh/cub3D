@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:37:24 by msaidi            #+#    #+#             */
-/*   Updated: 2023/12/10 18:17:38 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 11:44:49 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	dda_line(t_point *a, t_point *b, t_map	*info)
 	a->x = calcul_x(info);
 	while (i <= step)
 	{
-		a->y = calcul_y(info, p.y, b->y);
+		a->y = calcul_y(info, p.y);
 		put_pixel(info->img, round(p.x), round(p.y),
 			color(which_c(info), a->x, a->y));
 		p.x += delta.x / step;

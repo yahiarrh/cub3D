@@ -6,42 +6,42 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 16:52:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/10 18:17:40 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:16:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
-int	which_h(t_map *info)
+uint32_t	which_h(t_map *info)
 {
 	double	an;
 
 	an = info->ray_ang;
-	if (sin(an) <= 0 && !info->is_ver)
+	if (sin(an) > 0 && !info->is_ver)
 		return (info->t->so->height);
-	else if (sin(an) > 0 && !info->is_ver)
+	if (sin(an) <= 0 && !info->is_ver)
 		return (info->t->no->height);
 	if (cos(an) <= 0 && info->is_ver)
 		return (info->t->we->height);
-	else if (cos(an) > 0 && info->is_ver)
+	if (cos(an) > 0 && info->is_ver)
 		return (info->t->ea->height);
-	return (0.0);
+	return (0);
 }
 
-int	which_w(t_map *info)
+uint32_t	which_w(t_map *info)
 {
 	double	an;
 
 	an = info->ray_ang;
-	if (sin(an) <= 0 && !info->is_ver)
+	if (sin(an) > 0 && !info->is_ver)
 		return (info->t->so->width);
-	else if (sin(an) > 0 && !info->is_ver)
+	if (sin(an) <= 0 && !info->is_ver)
 		return (info->t->no->width);
 	if (cos(an) <= 0 && info->is_ver)
 		return (info->t->we->width);
-	else if (cos(an) > 0 && info->is_ver)
+	if (cos(an) > 0 && info->is_ver)
 		return (info->t->ea->width);
-	return (0.0);
+	return (0);
 }
 
 mlx_texture_t	*which_c(t_map *info)
@@ -50,9 +50,9 @@ mlx_texture_t	*which_c(t_map *info)
 
 	an = info->ray_ang;
 	if (!info->is_ver && sin(an) <= 0)
-		return (info->t->so);
-	if (!info->is_ver && sin(an) > 0)
 		return (info->t->no);
+	if (!info->is_ver && sin(an) > 0)
+		return (info->t->so);
 	if (info->is_ver && cos(an) > 0)
 		return (info->t->ea);
 	if (info->is_ver && cos(an) <= 0)
@@ -86,6 +86,6 @@ uint32_t	color(mlx_texture_t *img, unsigned int x, unsigned int y)
 {
 	uint32_t	*color;
 
-	color = (uint32_t *)img->pixels + ((y * img->width) + x);
+	color = (uint32_t *)img->pixels + (sizeof(uint8_t) * (y * img->width) + x);
 	return (*color);
 }

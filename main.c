@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:41:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/10 22:16:49 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:51:41 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ void	key_handle(void	*param)
 	if (mlx_is_key_down(info->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(info->mlx);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_F))
-		info->player->speed = 9;
+		info->player->speed = 7;
 	if (mlx_is_key_down(info->mlx, MLX_KEY_G))
-		info->player->speed = 4;
+		info->player->speed = 3.5;
 	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
 		info->player->angle -= rad_switch(2);
 	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
 		info->player->angle += rad_switch(2);
 	move(info);
 	move2(info);
-	if (info->mo)
+	if (!info->mo)
 		mouse_fnc(info);
 	mlx_delete_image(info->mlx, info->img);
 	info->img = mlx_new_image(info->mlx, WIDTH, HEIGHT);
