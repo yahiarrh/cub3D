@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:35:50 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/12/11 12:57:40 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:30:49 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	init_txt(t_map *info)
 	info->t->ea = mlx_load_png(info->e->e);
 	if (!info->t->ea)
 		ft_putstr_fd("", 2);
-	info->t->n = mlx_load_png("pngs/hold.png");
-	info->t->n1 = mlx_load_png("pngs/shoot.png");
+	info->t->n = mlx_load_png("pngs/gun/hold.png");
+	info->t->n1 = mlx_load_png("pngs/gun/shoot.png");
 }
 
 bool	no_wall(t_map *info, t_point *a)
@@ -52,6 +52,8 @@ bool	no_wall(t_map *info, t_point *a)
 		if (info->map[g(a->y)][g(a->x + i)] == '1')
 			return (0);
 		if (info->map[g(a->y - i)][g(a->x)] == '1')
+			return (0);
+		if (info->map[g(a->y)][g(a->x - i)] == '1')
 			return (0);
 	}
 	return (1);
